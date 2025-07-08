@@ -1,0 +1,32 @@
+:root {
+  --Clear-Sky-Night-BG-Color1: #01426d;
+  --Clear-Sky-Night-BG-Color2: #002746;
+  --Cloudy-Night-BG-Color1: #8c9d8c;
+  --Cloudy-Night-BG-Color2: #a8a18e;
+  --Partly-Cloudy-Night-BG-Color1: #b1ae9c;
+  --Partly-Cloudy-Night-BG-Color2: #6c928f;
+  --Raining-Cloudy-Night-BG-Color1: #7b7970;
+  --Raining-Cloudy-Night-BG-Color2: #4b5966;
+  --Snowy-Night-BG-Color1: #003a63;
+  --Snowy-Night-BG-Color2: #001d37;
+  --Storm-Night-BG-Color1: #013155;
+  --Storm-Night-BG-Color2: #01162e;
+  --Clear-Sunny-Day-BG-Color1: #f2e1b1;
+  --Clear-Sunny-Day-BG-Color2: #9edef2;
+  --Partly-Cloudy-Day-BG-Color1: #ffc7c9;
+  --Partly-Cloudy-Day-BG-Color2: #daf2df;
+  --Cloudy-Day-BG-Color1: #cfc6b0;
+  --Cloudy-Day-BG-Color2: #8ea895;
+  --Rainy-Day-BG-Color1: #fff3c9;
+  --Rainy-Day-BG-Color2: #c5e1e8;
+  --Snowy-Day-BG-Color1: #546573;
+  --Snowy-Day-BG-Color2: #354a5e;
+  --Stormy-Day-BG-Color1: #b7aca7;
+  --Stormy-Day-BG-Color2: #e07a61;
+}
+
+.bg {
+  background-image: linear-gradient(to right bottom, --Stormy-Day-BG-Color1, --Stormy-Day-BG-Color2);
+}
+
+/*# sourceMappingURL=style.css.map */
