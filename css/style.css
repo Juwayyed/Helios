@@ -1,32 +1,352 @@
-:root {
-  --Clear-Sky-Night-BG-Color1: #01426d;
-  --Clear-Sky-Night-BG-Color2: #002746;
-  --Cloudy-Night-BG-Color1: #8c9d8c;
-  --Cloudy-Night-BG-Color2: #a8a18e;
-  --Partly-Cloudy-Night-BG-Color1: #b1ae9c;
-  --Partly-Cloudy-Night-BG-Color2: #6c928f;
-  --Raining-Cloudy-Night-BG-Color1: #7b7970;
-  --Raining-Cloudy-Night-BG-Color2: #4b5966;
-  --Snowy-Night-BG-Color1: #003a63;
-  --Snowy-Night-BG-Color2: #001d37;
-  --Storm-Night-BG-Color1: #013155;
-  --Storm-Night-BG-Color2: #01162e;
-  --Clear-Sunny-Day-BG-Color1: #f2e1b1;
-  --Clear-Sunny-Day-BG-Color2: #9edef2;
-  --Partly-Cloudy-Day-BG-Color1: #ffc7c9;
-  --Partly-Cloudy-Day-BG-Color2: #daf2df;
-  --Cloudy-Day-BG-Color1: #cfc6b0;
-  --Cloudy-Day-BG-Color2: #8ea895;
-  --Rainy-Day-BG-Color1: #fff3c9;
-  --Rainy-Day-BG-Color2: #c5e1e8;
-  --Snowy-Day-BG-Color1: #546573;
-  --Snowy-Day-BG-Color2: #354a5e;
-  --Stormy-Day-BG-Color1: #b7aca7;
-  --Stormy-Day-BG-Color2: #e07a61;
+* {
+  padding: 0;
+  margin: 0;
 }
 
-.bg {
-  background-image: linear-gradient(to right bottom, --Stormy-Day-BG-Color1, --Stormy-Day-BG-Color2);
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+  width: 100%;
+  height: 100%;
 }
 
-/*# sourceMappingURL=style.css.map */
+body {
+  font-family: "Asap", Helvetica, sans-serif;
+  line-height: 1.6;
+  background: url("https://images.unsplash.com/photo-1444090695923-48e08781a76a?ixlib=rb-0.3.5&q=85&fm=jpg&crop=entropy&cs=srgb&s=cb58d4212ead01ed72fdffd6b78601ab")
+    center no-repeat;
+  background-size: cover;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.location {
+  font-weight: 800;
+  font-size: 2rem;
+}
+
+/* New Codepen */
+.search-trigger,
+.fullscreen-trigger {
+  display: table-cell;
+  padding: 0 30px 0 20px;
+  vertical-align: middle;
+}
+
+.overlay {
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.search-trigger {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+/* Search Overlay */
+
+.fullscreen-search-overlay
+  #fullscreen-search-wrapper
+  #fullscreen-searchform
+  input[type="submit"] {
+  position: absolute;
+  width: 100px;
+  height: 100%;
+  background-color: transparent;
+  border: 0;
+  right: 0;
+  top: 0;
+}
+
+#fullscreen-searchform:focus {
+  outline: none;
+  border: none;
+}
+
+.fullscreen-search-overlay
+  #fullscreen-search-wrapper
+  #fullscreen-searchform
+  .fullscreen-search-icon {
+  font-size: 25px;
+  position: absolute;
+  right: 15px;
+  width: 25px;
+  top: 30px;
+  color: #fff;
+  color: rgba(255, 255, 255, 0.2);
+  -webkit-transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
+  -ms-transition: all 0.2s ease-out;
+  -o-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+}
+
+.fullscreen-search-icon:hover,
+.fullscreen-search-icon:focus {
+  border: none;
+  outline: none;
+  color: #fff !important;
+  -webkit-transition: transform ease-out 0.2s;
+  -moz-transition: transform ease-out 0.2s;
+  -ms-transition: transform ease-out 0.2s;
+  -o-transition: transform ease-out 0.2s;
+  transition: transform ease-out 0.2s;
+  transform: rotate(180deg);
+}
+
+#fullscreen-searchform {
+  position: relative;
+  vertical-align: middle;
+}
+
+.fullscreen-search-overlay
+  #fullscreen-search-wrapper
+  #fullscreen-searchform
+  #fullscreen-search-input {
+  width: 800px;
+  background-color: transparent;
+  -webkit-box-shadow: 0 3px 0 0 rgba(255, 255, 255, 0.1);
+  -moz-box-shadow: 0 3px 0 0 rgba(255, 255, 255, 0.1);
+  box-shadow: 0 3px 0 0 rgba(255, 255, 255, 0.1);
+  border: 0;
+  text-align: center;
+  font-size: 35px;
+  padding: 20px;
+  color: #fff;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -ms-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+}
+.fullscreen-search-overlay
+  #fullscreen-search-wrapper
+  #fullscreen-searchform
+  #fullscreen-search-input:focus {
+  border: none;
+  outline: none;
+}
+
+.fullscreen-search-overlay.fullscreen-search-overlay-show {
+  visibility: visible;
+  opacity: 1;
+}
+
+.fullscreen-search-overlay {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  visibility: hidden;
+  background-color: rgba(0, 0, 0, 0.94);
+  text-align: center;
+  -webkit-transition: all ease-in-out 0.25s;
+  -moz-transition: all ease-in-out 0.25s;
+  -ms-transition: all ease-in-out 0.25s;
+  -o-transition: all ease-in-out 0.25s;
+  transition: all ease-in-out 0.25s;
+}
+
+.animate-element,
+.effect-bg-layer,
+.fullscreen-search-overlay {
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+}
+
+.fullscreen-search-overlay {
+  z-index: 999;
+}
+
+.fullscreen-search-overlay .fullscreen-close:link,
+.fullscreen-search-overlay .fullscreen-close:visited {
+  color: #fff;
+}
+
+.fullscreen-search-overlay .fullscreen-close {
+  position: absolute;
+  right: 50px;
+  top: 70px;
+  font-size: 26px;
+  -webkit-transition: transform ease-out 0.2s;
+  -moz-transition: transform ease-out 0.2s;
+  -ms-transition: transform ease-out 0.2s;
+  -o-transition: transform ease-out 0.2s;
+  transition: transform ease-out 0.2s;
+  transform: rotate(0deg);
+}
+
+.fullscreen-search-overlay.fullscreen-search-overlay-show
+  #fullscreen-search-wrapper {
+  opacity: 1;
+  visibility: visible;
+  -webkit-transform: scale(1);
+  -moz-transform: scale(1);
+  -ms-transform: scale(1);
+  -o-transform: scale(1);
+  transform: scale(1);
+  -ms-transform: scale(1);
+}
+
+.fullscreen-search-overlay #fullscreen-search-wrapper {
+  display: inline-block;
+  max-width: 1000px;
+  vertical-align: middle;
+  text-align: center;
+  font-size: 18px;
+  -webkit-transform: scale(0.9);
+  -moz-transform: scale(0.9);
+  -ms-transform: scale(0.9);
+  -o-transform: scale(0.9);
+  transform: scale(0.9);
+  -ms-transform: scale(0.9);
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transition: all ease-in-out 0.3s;
+  -moz-transition: all ease-in-out 0.3s;
+  -ms-transition: all ease-in-out 0.3s;
+  -o-transition: all ease-in-out 0.3s;
+  transition: all ease-in-out 0.3s;
+}
+
+.search-trigger {
+  -webkit-transition: color 0.2s ease-in-out;
+  -moz-transition: color 0.2s ease-in-out;
+  -ms-transition: color 0.2s ease-in-out;
+  -o-transition: color 0.2s ease-in-out;
+  transition: color 0.2s ease-in-out;
+}
+/* Search Button */
+#search-button {
+  display: relative;
+  vertical-align: middle;
+  height: 50px;
+  width: 40px;
+  border: white solid 0.7px;
+  border-radius: 50%;
+  cursor: pointer;
+  opacity: 1;
+  padding-right: 10px;
+  -webkit-transition: all 400ms;
+  -moz-transition: all 400ms;
+  -ms-transition: all 400ms;
+  -o-transition: all 400ms;
+  transition: all 400ms;
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  transform: rotate(0deg);
+}
+#search-button i {
+  color: white !important;
+  font-size: 20px;
+  position: absolute;
+  left: 15px;
+  top: 15px;
+}
+
+#search-button:hover,
+.fullscreen-close:hover {
+  opacity: 0.6;
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  transform: rotate(180deg);
+  -webkit-transition: all 400ms;
+  -moz-transition: all 400ms;
+  -ms-transition: all 400ms;
+  -o-transition: all 400ms;
+  transition: all 400ms;
+}
+#fullscreen-search-input:focus {
+  box-shadow: 0px 3px 0px 0px rgba(255, 255, 255, 0.54) !important;
+}
+
+.suggestions-box {
+  position: absolute;
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-top: none;
+  z-index: 10;
+  background-color: white;
+}
+
+.suggestion-item {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.suggestion-item:hover {
+  background-color: #f0f0f0;
+}
+
+/* Card */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.glass-card {
+  top: 3rem;
+  left: calc((100vw - 400px) / 2);
+  width: 40rem;
+  height: auto;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2rem;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.37);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 20px;
+  color: #fff;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: absolute;
+}
+
+.glass-card h2 {
+  margin-top: 0;
+  font-size: 3rem;
+}
+
+#weather-icon {
+  height: 20rem;
+  width: 20rem;
+  transition: transform 0.3s ease;
+  margin-bottom: 1rem;
+}
+
+#weather-icon:hover,
+#weather-icon:active {
+  transform: scale(1.1);
+}
+
+#temperature-text,
+#date-text,
+#time-text,
+#dayShift {
+  font-size: 1.5rem;
+}
+
+hr {
+  height: 1px;
+  background-color: rgb(255, 255, 255, 0.1);
+  border: none;
+  margin: 5px 0;
+  width: 90%;
+}

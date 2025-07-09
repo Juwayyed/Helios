@@ -34,6 +34,7 @@ if (navigator.geolocation)
         const sunrise = data.daily.sunrise;
         const sunset = data.daily.sunset;
 
+        const weatherCode = data.current.weathercode;
         /* Copied Down 
         const sunriseHour = Number(sunrise.slice(11, 13));
         const sunsetHour = Number(sunset.slice(11, 13));
@@ -58,24 +59,41 @@ if (navigator.geolocation)
               data.address.village ||
               "Unknown";
             const country = data.address.country || "Unknown";
+            const todayHour = times_current.slice(11, 16);
+            const date_current = times_current.slice(0, 10);
+
+            //console.log(`Your Location: ${city}, ${country}`);
+
             document.getElementById(
-              "city-name"
-            ).textContent = `${city}, ${country}`;
-            console.log(`Your Location: ${city}, ${country}`);
+              "card-title"
+            ).textContent = `${city} - ${country}`;
+
+            document.getElementById(
+              "temperature-text"
+            ).textContent = `Temperature: ${temperature_current}°C`;
+
+            document.getElementById(
+              "date-text"
+            ).textContent = `Date: ${date_current}`;
+
+            document.getElementById(
+              "time-text"
+            ).textContent = `Time: ${todayHour}`;
+
+            if (daytime_current) {
+              document.getElementById(
+                "dayShift"
+              ).textContent = `It's Daytime in ${city}!`;
+            } else {
+              document.getElementById(
+                "dayShift"
+              ).textContent = `It's Nighttime in ${city}!`;
+            }
           })
           .catch((error) => {
             console.error(error);
-            document.getElementById("city-name").textContent =
-              "An error occurred";
+            document.getElementById("city").textContent = "An error occurred";
           });
-
-        /*
-        if (daytime_current) {
-          console.log("Is it DayTime!");
-        } else {
-          console.log("Is it NightTime!");
-        }
-        */
 
         /******************** Current Day Forecast ***********************/
         if (daytime_current && rain_current && showers_current) {
@@ -222,3 +240,91 @@ if (navigator.geolocation)
       })
   });
 */
+
+/* Toggle Button Between Today & Week */
+
+/************************************************* New *************************************************/
+/********************************************************************************************************/
+/********************************************************************************************************/
+/********************************************************************************************************/
+/********************************************************************************************************/
+/********************************************************************************************************/
+/* Search Bar */
+const wHeight = window.innerHeight;
+const sb = document.getElementById("search-button");
+const closeSB = document.getElementById("fullscreen-close-button");
+const SearchOverlay = document.getElementById("search-overlay");
+const searchBar = document.getElementById("fullscreen-searchform");
+
+searchBar.style.top = wHeight / 2 + "px";
+//console.log(wHeight);
+
+window.addEventListener(
+  "resize",
+  function () {
+    //console.log(wHeight);
+    //wHeight = window.innerHeight;
+    searchBar.style.top = wHeight / 2 + "px";
+  },
+  true
+);
+
+document.addEventListener(
+  "click",
+  function () {
+    sb.onclick = function () {
+      console.log("Opened Search for Element: ");
+      SearchOverlay.classList.add("fullscreen-search-overlay-show");
+    };
+
+    closeSB.onclick = function () {
+      console.log("Closed Search for Element: " + closeSB);
+      SearchOverlay.classList.remove("fullscreen-search-overlay-show");
+    };
+  },
+  true
+);
+
+/* Search Suggestions */
+const searchInput = document.getElementById("fullscreen-search-input");
+const suggestionsBox = document.getElementById("suggestions-box");
+const API_KEY = "1d6fc4b5cfe4490db8ea582b799b2ebd";
+
+searchInput.addEventListener("input", async (e) => {
+  const query = e.target.value;
+
+  if (query.length < 3) {
+    suggestionsBox.innerHTML = "";
+    return;
+  }
+
+  const response = await fetch(
+    `https://api.geoapify.com/v1/geocode/autocomplete?text=${query}&apiKey=${API_KEY}`
+  );
+  const data = await response.json();
+
+  suggestionsBox.innerHTML = ""; // Made that to clear previous suggestions
+
+  if (data.features) {
+    data.features.forEach((feature) => {
+      const suggestionItem = document.createElement("div");
+      suggestionItem.classList.add("suggestion-item");
+      suggestionItem.innerText = feature.properties.formatted;
+
+      suggestionItem.addEventListener("click", () => {
+        searchInput.value = feature.properties.formatted;
+        suggestionsBox.innerHTML = "";
+        // Optional: Trigger your weather search function here
+      });
+
+      suggestionsBox.appendChild(suggestionItem);
+    });
+  }
+});
+
+// To hide suggestions when users click outside
+document.addEventListener("click", (e) => {
+  if (e.target.id !== "city-input") {
+    suggestionsBox.innerHTML = "";
+  }
+});
