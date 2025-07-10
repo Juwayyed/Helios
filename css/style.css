@@ -13,9 +13,9 @@ html {
 body {
   font-family: "Asap", Helvetica, sans-serif;
   line-height: 1.6;
-  background: url("https://images.unsplash.com/photo-1444090695923-48e08781a76a?ixlib=rb-0.3.5&q=85&fm=jpg&crop=entropy&cs=srgb&s=cb58d4212ead01ed72fdffd6b78601ab")
-    center no-repeat;
+  background: url("https://images.unsplash.com/photo-1444090695923-48e08781a76a?ixlib=rb-0.3.5&q=85&fm=jpg&crop=entropy&cs=srgb&s=cb58d4212ead01ed72fdffd6b78601ab");
   background-size: cover;
+  background-position: center;
   margin: 0;
   width: 100%;
   height: 100%;
@@ -324,9 +324,49 @@ body {
   font-size: 3rem;
 }
 
+.week-container {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 1rem;
+  justify-content: center;
+  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+}
+
+.week-card {
+  /*bottom: 3rem;*/
+  width: 10rem;
+  height: 12rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.37);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  /*padding: 20px;*/
+  color: #fff;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s ease;
+}
+
+.week-card:hover,
+.week-card:active {
+  transform: scale(1.1);
+}
+
+.weather-icon-week {
+  width: 8rem;
+  height: 8rem;
+  object-fit: contain;
+}
+
 #weather-icon {
-  height: 20rem;
-  width: 20rem;
+  height: 40rem;
+  width: 40rem;
   transition: transform 0.3s ease;
   margin-bottom: 1rem;
 }
@@ -337,9 +377,12 @@ body {
 }
 
 #temperature-text,
-#date-text,
+#date_text,
 #time-text,
-#dayShift {
+#dayShift,
+#weather_description,
+#sunrise_text,
+#sunset_text {
   font-size: 1.5rem;
 }
 
