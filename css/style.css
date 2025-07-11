@@ -10,15 +10,17 @@ html {
   height: 100%;
 }
 
-body {
+#body {
   font-family: "Asap", Helvetica, sans-serif;
   line-height: 1.6;
-  background: url("https://images.unsplash.com/photo-1444090695923-48e08781a76a?ixlib=rb-0.3.5&q=85&fm=jpg&crop=entropy&cs=srgb&s=cb58d4212ead01ed72fdffd6b78601ab");
+  background-image: url("https://images.unsplash.com/photo-1444090695923-48e08781a76a?ixlib=rb-0.3.5&q=85&fm=jpg&crop=entropy&cs=srgb&s=cb58d4212ead01ed72fdffd6b78601ab");
   background-size: cover;
-  background-position: center;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-color: #000;
   margin: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
 }
 
 .location {
@@ -26,7 +28,6 @@ body {
   font-size: 2rem;
 }
 
-/* New Codepen */
 .search-trigger,
 .fullscreen-trigger {
   display: table-cell;
@@ -40,10 +41,15 @@ body {
   background: rgba(0, 0, 0, 0.8);
 }
 
-.search-trigger {
+#toggleIcon,
+#toggleIconClose {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
+  font-size: 2.5rem;
+  cursor: pointer;
+  top: 3rem;
+  right: 2rem;
+  color: #ddd;
+  z-index: 10;
 }
 
 /* Search Overlay */
@@ -60,7 +66,6 @@ body {
   right: 0;
   top: 0;
 }
-
 #fullscreen-searchform:focus {
   outline: none;
   border: none;
@@ -83,7 +88,6 @@ body {
   -o-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
 }
-
 .fullscreen-search-icon:hover,
 .fullscreen-search-icon:focus {
   border: none;
@@ -130,7 +134,8 @@ body {
   outline: none;
 }
 
-.fullscreen-search-overlay.fullscreen-search-overlay-show {
+.fullscreen-search-overlay,
+.fullscreen-search-overlay-show {
   visibility: visible;
   opacity: 1;
 }
@@ -191,7 +196,6 @@ body {
   -ms-transform: scale(1);
   -o-transform: scale(1);
   transform: scale(1);
-  -ms-transform: scale(1);
 }
 
 .fullscreen-search-overlay #fullscreen-search-wrapper {
@@ -205,7 +209,6 @@ body {
   -ms-transform: scale(0.9);
   -o-transform: scale(0.9);
   transform: scale(0.9);
-  -ms-transform: scale(0.9);
   opacity: 0;
   visibility: hidden;
   -webkit-transition: all ease-in-out 0.3s;
@@ -216,15 +219,21 @@ body {
 }
 
 .search-trigger {
+  position: absolute;
+  height: 3rem;
+  width: 3rem;
+  top: 4rem;
+  right: 3rem;
   -webkit-transition: color 0.2s ease-in-out;
   -moz-transition: color 0.2s ease-in-out;
   -ms-transition: color 0.2s ease-in-out;
   -o-transition: color 0.2s ease-in-out;
   transition: color 0.2s ease-in-out;
 }
+
 /* Search Button */
 #search-button {
-  display: relative;
+  position: relative;
   vertical-align: middle;
   height: 50px;
   width: 40px;
@@ -233,11 +242,11 @@ body {
   cursor: pointer;
   opacity: 1;
   padding-right: 10px;
+  transition: all 400ms;
   -webkit-transition: all 400ms;
   -moz-transition: all 400ms;
   -ms-transition: all 400ms;
   -o-transition: all 400ms;
-  transition: all 400ms;
   -webkit-transform: rotate(0deg);
   -moz-transform: rotate(0deg);
   -ms-transform: rotate(0deg);
@@ -252,6 +261,11 @@ body {
   top: 15px;
 }
 
+#search-button:hover i {
+  opacity: 0.6;
+  transform: rotate(180deg);
+}
+
 #search-button:hover,
 .fullscreen-close:hover {
   opacity: 0.6;
@@ -260,55 +274,74 @@ body {
   -ms-transform: rotate(180deg);
   -o-transform: rotate(180deg);
   transform: rotate(180deg);
+  transition: all 400ms;
   -webkit-transition: all 400ms;
   -moz-transition: all 400ms;
   -ms-transition: all 400ms;
   -o-transition: all 400ms;
-  transition: all 400ms;
 }
 #fullscreen-search-input:focus {
   box-shadow: 0px 3px 0px 0px rgba(255, 255, 255, 0.54) !important;
 }
 
-.suggestions-box {
-  position: absolute;
-  width: 100%;
-  max-height: 200px;
-  overflow-y: auto;
-  border: 1px solid #ddd;
-  border-top: none;
-  z-index: 10;
-  background-color: white;
-}
-
-.suggestion-item {
-  padding: 8px;
-  cursor: pointer;
-}
-
-.suggestion-item:hover {
-  background-color: #f0f0f0;
-}
-
+/* Media Queries Part Copied */
 /* Card */
 .container {
+  width: 100vw;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  position: relative;
 }
 
-.glass-card {
-  top: 3rem;
-  left: calc((100vw - 400px) / 2);
-  width: 40rem;
+#card_front {
+  transition: opacity 0.5s ease, visibility 0.5s ease;
   height: auto;
+  max-height: 65%;
   background: rgba(255, 255, 255, 0.1);
-  border-radius: 2rem;
   backdrop-filter: blur(10px);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.37);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  padding: 20px;
+  color: #fff;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  /*position: absolute;
+  top: 1rem;*/
+}
+
+.glass-card h2 {
+  margin-top: 0;
+}
+
+/* Visible state */
+.open {
+  visibility: visible;
+  opacity: 1;
+  z-index: 1;
+  display: block;
+}
+
+/* Hidden state */
+
+.hidden {
+  visibility: hidden;
+  opacity: 0;
+  z-index: 0;
+  transform: scale(0.9);
+}
+
+#card_back {
+  height: auto;
+  max-height: 60%;
+  width: 60vw;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   color: #fff;
   text-align: center;
   display: flex;
@@ -319,33 +352,22 @@ body {
   position: absolute;
 }
 
-.glass-card h2 {
-  margin-top: 0;
-  font-size: 3rem;
-}
-
 .week-container {
   position: fixed;
   left: 50%;
   transform: translateX(-50%);
-  bottom: 1rem;
+  max-height: 30%;
   justify-content: center;
   align-items: center;
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 5px;
 }
 
 .week-card {
-  /*bottom: 3rem;*/
-  width: 10rem;
-  height: 12rem;
   background: rgba(255, 255, 255, 0.1);
   border-radius: 2px;
   backdrop-filter: blur(10px);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.37);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  /*padding: 20px;*/
   color: #fff;
   text-align: center;
   justify-content: center;
@@ -356,19 +378,15 @@ body {
 .week-card:hover,
 .week-card:active {
   transform: scale(1.1);
+  cursor: pointer;
 }
 
 .weather-icon-week {
-  width: 8rem;
-  height: 8rem;
   object-fit: contain;
 }
 
 #weather-icon {
-  height: 40rem;
-  width: 40rem;
   transition: transform 0.3s ease;
-  margin-bottom: 1rem;
 }
 
 #weather-icon:hover,
@@ -376,20 +394,422 @@ body {
   transform: scale(1.1);
 }
 
-#temperature-text,
-#date_text,
-#time-text,
-#dayShift,
-#weather_description,
-#sunrise_text,
-#sunset_text {
-  font-size: 1.5rem;
-}
-
 hr {
-  height: 1px;
   background-color: rgb(255, 255, 255, 0.1);
   border: none;
-  margin: 5px 0;
   width: 90%;
+}
+
+/* Social Icons */
+.footer {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.social-icons {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+
+.social-icon svg {
+  width: 28px;
+  height: 28px;
+  color: #777;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.social-icon svg:hover {
+  color: #000;
+  transform: scale(1.2);
+}
+/*************** Media Queries **************/
+/*
+@media (min-width: 320px) {
+}
+
+@media (min-width: 481px) {
+}
+
+@media (min-width: 768px) {
+}
+
+@media (min-width: 992px) {
+}
+
+@media (min-width: 1200px) {
+  .glass-card {
+    top: 3rem;
+    left: calc((100vw - 400px) / 2);
+    width: 40rem;
+    border-radius: 2rem;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.37);
+    padding: 20px;
+  }
+
+  .glass-card h2 {
+    margin-top: 2rem;
+    font-size: 2rem;
+  }
+
+  .week-container {
+    left: 50%;
+    bottom: 1rem;
+    max-height: 30%;
+    gap: 5px;
+  }
+
+  .week-card {
+    width: 10rem;
+    height: 12rem;
+    border-radius: 2px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.37);
+  }
+
+  .weather-icon-week {
+    width: 8rem;
+    height: 8rem;
+  }
+
+  #weather-icon {
+    margin-top: 1rem;
+    width: 25rem;
+    height: auto;
+  }
+
+  #temperature-text,
+  #date_text,
+  #time-text,
+  #dayShift,
+  #weather_description,
+  #sunrise_text,
+  #sunset_text {
+    font-size: 1.5rem;
+  }
+
+  hr {
+    height: 1px;
+    margin: 5px 0;
+  }
+}
+
+@media (min-width: 1440px) {
+}
+
+@media (min-width: 1920px) {
+}
+*/
+
+/* Gemini */
+
+/* =================================== */
+/* 1. Small Mobile (320px and up)      */
+/* Base styles - stacked and fluid     */
+/* =================================== */
+@media (min-width: 320px) {
+  .glass-card {
+    /* Fluid width, normal document flow */
+    width: 90vw;
+    margin: 1.5rem auto; /* Center horizontally */
+    border-radius: 1.5rem;
+    padding: 15px;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  }
+
+  .glass-card h2 {
+    margin-top: 1rem;
+    font-size: 1.5rem;
+  }
+
+  .week-container {
+    /* Horizontal scroll for the week forecast */
+    display: flex;
+    overflow-x: auto;
+    gap: 10px;
+    padding-bottom: 10px; /* Space for scrollbar */
+    width: 100%;
+  }
+
+  .week-card {
+    flex-shrink: 0; /* Prevent cards from shrinking */
+    width: 6rem;
+    height: 8rem;
+    border-radius: 1rem;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  }
+
+  .weather-icon-week {
+    width: 4rem;
+    height: 4rem;
+  }
+
+  #weather-icon {
+    margin-top: 1rem;
+    width: 12rem; /* Significantly smaller icon */
+  }
+
+  #temperature-text,
+  #date_text,
+  #time-text,
+  #dayShift,
+  #weather_description,
+  #sunrise_text,
+  #sunset_text {
+    font-size: 1.1rem;
+  }
+
+  hr {
+    height: 1px;
+    margin: 3px 0;
+  }
+}
+
+/* =================================== */
+/* 2. Large Mobile (481px and up)      */
+/* Slightly larger elements            */
+/* =================================== */
+@media (min-width: 481px) {
+  .glass-card {
+    width: 400px; /* Start using fixed width */
+  }
+
+  #weather-icon {
+    width: 16rem;
+  }
+
+  #temperature-text,
+  #date_text,
+  #time-text,
+  #dayShift,
+  #weather_description,
+  #sunrise_text,
+  #sunset_text {
+    font-size: 1.2rem;
+  }
+}
+
+/* =================================== */
+/* 3. Tablet (768px and up)            */
+/* Switch to absolute positioning      */
+/* =================================== */
+@media (min-width: 768px) {
+  .glass-card {
+    position: absolute;
+    top: 3rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 35rem; /* ~560px */
+    border-radius: 2rem;
+  }
+
+  .glass-card h2 {
+    font-size: 1.8rem;
+  }
+
+  .week-container {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 2rem;
+    width: auto;
+    overflow-x: visible; /* No more scrolling */
+    gap: 10px;
+  }
+
+  .week-card {
+    width: 8rem;
+    height: 10rem;
+  }
+
+  .weather-icon-week {
+    width: 6rem;
+    height: 6rem;
+  }
+
+  #weather-icon {
+    width: 20rem;
+  }
+
+  #temperature-text,
+  #date_text,
+  #time-text,
+  #dayShift,
+  #weather_description,
+  #sunrise_text,
+  #sunset_text {
+    font-size: 1.4rem;
+  }
+}
+
+/* =================================== */
+/* 4. Small Desktop (992px and up)     */
+/* Closer to the final design          */
+/* =================================== */
+@media (min-width: 992px) {
+  .glass-card {
+    width: 38rem; /* ~608px */
+  }
+
+  .week-card {
+    width: 9rem;
+    height: 11rem;
+  }
+
+  .weather-icon-week {
+    width: 7rem;
+    height: 7rem;
+  }
+
+  #weather-icon {
+    width: 22rem;
+  }
+}
+
+/* =================================== */
+/* 5. Standard Desktop (1200px and up) */
+/* This is YOUR provided code          */
+/* =================================== */
+@media (min-width: 1200px) {
+  .glass-card {
+    position: absolute;
+    top: 3rem;
+    left: 50%;
+    transform: translateX(-50%); /* Better centering */
+    width: 40rem; /* ~640px */
+    border-radius: 2rem;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.37);
+    padding: 20px;
+  }
+
+  .glass-card h2 {
+    margin-top: 2rem;
+    font-size: 2rem;
+  }
+
+  .week-container {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 1rem;
+    max-height: 30%;
+    gap: 5px;
+  }
+
+  .week-card {
+    width: 10rem;
+    height: 12rem;
+    border-radius: 2rem; /* Your code had 2px, 2rem seems more consistent */
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.37);
+  }
+
+  .weather-icon-week {
+    width: 8rem;
+    height: 8rem;
+  }
+
+  #weather-icon {
+    margin-top: 1rem;
+    width: 25rem;
+  }
+
+  #temperature-text,
+  #date_text,
+  #time-text,
+  #dayShift,
+  #weather_description,
+  #sunrise_text,
+  #sunset_text {
+    font-size: 1.5rem;
+  }
+
+  hr {
+    height: 1px;
+    margin: 5px 0;
+  }
+}
+
+/* =================================== */
+/* 6. Large Desktops (1440px+)         */
+/* Slightly increase size for comfort  */
+/* =================================== */
+@media (min-width: 1440px) {
+  .glass-card {
+    width: 44rem;
+  }
+
+  .glass-card h2 {
+    font-size: 2.2rem;
+  }
+
+  #weather-icon {
+    width: 28rem;
+  }
+
+  #temperature-text,
+  #date_text,
+  #time-text,
+  #dayShift,
+  #weather_description,
+  #sunrise_text,
+  #sunset_text {
+    font-size: 1.6rem;
+  }
+}
+
+/* =================================== */
+/* 7. Extra Large (1920px+)            */
+/* Max out sizes for large displays    */
+/* =================================== */
+@media (min-width: 1920px) {
+  .glass-card {
+    width: 48rem;
+  }
+
+  .glass-card h2 {
+    font-size: 2.5rem;
+  }
+
+  #weather-icon {
+    width: 30rem;
+  }
+
+  #temperature-text,
+  #date_text,
+  #time-text,
+  #dayShift,
+  #weather_description,
+  #sunrise_text,
+  #sunset_text {
+    font-size: 1.8rem;
+  }
+}
+
+/* New Experimental */
+/* HTML Table */
+.four-columns {
+  display: flex;
+  gap: 20px;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.cell {
+  height: auto;
+  border-bottom: 1px solid #ccc;
+}
+
+.column .cell:last-child {
+  border-bottom: none;
 }
