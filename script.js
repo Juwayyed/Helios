@@ -49,6 +49,17 @@ if (navigator.geolocation)
         const card_front = document.getElementById("card_front");
         const card_back = document.getElementById("card_back");
 
+        //Days of The Week
+        const days = [
+          "Sunday",
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+        ];
+
         //Icons
         const sunriseIcon = "☀️";
         const sunsetIcon = "🌒";
@@ -72,9 +83,10 @@ if (navigator.geolocation)
           for (let i = 1; i < 25; i++) {
             let HourlyTodayData = (document.getElementById(
               `cell_${i}`
-            ).innerHTML = `${times_hourly[i].slice(11, 16)} | Temperature: ${
-              temperature_hourly[i]
-            }   `);
+            ).innerHTML = `${timeIcon} ${times_hourly[i].slice(
+              11,
+              16
+            )} | ${tempIcon} Temperature: ${temperature_hourly[i]}   `);
           }
         });
 
@@ -170,15 +182,6 @@ if (navigator.geolocation)
 
             //Days Names "Today"
             const dateStr = new Date(date_current);
-            const days = [
-              "Sunday",
-              "Monday",
-              "Tuesday",
-              "Wednesday",
-              "Thursday",
-              "Friday",
-              "Saturday",
-            ];
             const todayName = days[dateStr.getDay()];
 
             //Days Names "Week"
@@ -224,11 +227,17 @@ if (navigator.geolocation)
 
             //Loop For Displaying Dates at the bottom of the week cards
             for (let i = 0; i < dates_weekly.length; i++) {
+              const dateOptions = { month: "long", day: "numeric" };
+              const weekDatesObj = new Date(
+                `${dates_weekly[i]}`
+              ).toLocaleDateString("en-US", dateOptions);
+
               document.getElementById(
                 `date-text-week--${i + 1}`
-              ).innerHTML = `${weekDays[i]}<br>${dates_weekly[i]}`;
+              ).innerHTML = `${weekDays[i]}<br>${weekDatesObj}`;
             }
 
+            /////////////////////////
             /******************** Current Day Forecast ***********************/
             if (daytime_current && rain_current && showers_current) {
               document.getElementById(
@@ -438,6 +447,9 @@ if (navigator.geolocation)
               }
             });
 
+            // Week Bottom Bar Time & Date Formatting
+            console.log(dates_weekly);
+
             ////////////////////////////////////////////////////////////////////////////////
             ///////////////////////////////////////////////////////////////////////////////
             ///////////////////// Hourly (Today) Forecast icon change /////////////////////////////
@@ -509,21 +521,26 @@ if (navigator.geolocation)
 /********************************************************************************************************/
 /********************************************************************************************************/
 /********************************************************************************************************/
-/* Search Bar */
+//* Search Bar */
 let wHeight = window.innerHeight;
 const sb = document.getElementById("search-button");
 const closeSB = document.getElementById("fullscreen-close-button");
 const SearchOverlay = document.getElementById("search-overlay");
 const searchBar = document.getElementById("fullscreen-searchform");
+
 searchBar.style.top = wHeight / 2 + "px";
+//console.log(wHeight);
+
 window.addEventListener(
   "resize",
   function () {
+    //console.log(wHeight);
     wHeight = window.innerHeight;
     searchBar.style.top = wHeight / 2 + "px";
   },
   true
 );
+
 document.addEventListener(
   "click",
   function () {
@@ -531,6 +548,7 @@ document.addEventListener(
       console.log("Opened Search for Element: ");
       SearchOverlay.classList.add("fullscreen-search-overlay-show");
     };
+
     closeSB.onclick = function () {
       console.log("Closed Search for Element: " + closeSB);
       SearchOverlay.classList.remove("fullscreen-search-overlay-show");
@@ -538,3 +556,47 @@ document.addEventListener(
   },
   true
 );
+
+/* Search Suggestions */
+const searchInput = document.getElementById("fullscreen-search-input");
+const suggestionsBox = document.getElementById("suggestions-box");
+const API_KEY = "1d6fc4b5cfe4490db8ea582b799b2ebd";
+
+searchInput.addEventListener("input", async (e) => {
+  const query = e.target.value;
+
+  if (query.length < 3) {
+    suggestionsBox.innerHTML = "";
+    return;
+  }
+
+  const response = await fetch(
+    `https://api.geoapify.com/v1/geocode/autocomplete?text=${query}&apiKey=${API_KEY}`
+  );
+  const data = await response.json();
+
+  suggestionsBox.innerHTML = ""; // Made that to clear previous suggestions
+
+  if (data.features) {
+    data.features.forEach((feature) => {
+      const suggestionItem = document.createElement("div");
+      suggestionItem.classList.add("suggestion-item");
+      suggestionItem.innerText = feature.properties.formatted;
+
+      suggestionItem.addEventListener("click", () => {
+        searchInput.value = feature.properties.formatted;
+        suggestionsBox.innerHTML = "";
+        // Optional: Trigger your weather search function here
+      });
+
+      suggestionsBox.appendChild(suggestionItem);
+    });
+  }
+});
+
+// To hide suggestions when users click outside
+document.addEventListener("click", (e) => {
+  if (e.target.id !== "city-input") {
+    suggestionsBox.innerHTML = "";
+  }
+});

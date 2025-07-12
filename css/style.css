@@ -21,18 +21,12 @@ html {
   margin: 0;
   width: 100vw;
   height: 100vh;
+  overflow: hidden;
 }
 
 .location {
   font-weight: 800;
   font-size: 2rem;
-}
-
-.search-trigger,
-.fullscreen-trigger {
-  display: table-cell;
-  padding: 0 30px 0 20px;
-  vertical-align: middle;
 }
 
 .overlay {
@@ -51,6 +45,13 @@ html {
   color: #ddd;
   z-index: 10;
 }
+
+/* Search */
+/*.search-trigger {
+  position: absolute;
+  top: 45%;
+  left: 45%;
+}*/
 
 /* Search Overlay */
 
@@ -134,8 +135,7 @@ html {
   outline: none;
 }
 
-.fullscreen-search-overlay,
-.fullscreen-search-overlay-show {
+.fullscreen-search-overlay.fullscreen-search-overlay-show {
   visibility: visible;
   opacity: 1;
 }
@@ -196,6 +196,7 @@ html {
   -ms-transform: scale(1);
   -o-transform: scale(1);
   transform: scale(1);
+  -ms-transform: scale(1);
 }
 
 .fullscreen-search-overlay #fullscreen-search-wrapper {
@@ -209,6 +210,7 @@ html {
   -ms-transform: scale(0.9);
   -o-transform: scale(0.9);
   transform: scale(0.9);
+  -ms-transform: scale(0.9);
   opacity: 0;
   visibility: hidden;
   -webkit-transition: all ease-in-out 0.3s;
@@ -219,21 +221,17 @@ html {
 }
 
 .search-trigger {
-  position: absolute;
-  height: 3rem;
-  width: 3rem;
-  top: 4rem;
-  right: 3rem;
   -webkit-transition: color 0.2s ease-in-out;
   -moz-transition: color 0.2s ease-in-out;
   -ms-transition: color 0.2s ease-in-out;
   -o-transition: color 0.2s ease-in-out;
   transition: color 0.2s ease-in-out;
 }
-
 /* Search Button */
 #search-button {
-  position: relative;
+  position: absolute;
+  top: 4rem;
+  right: 3rem;
   vertical-align: middle;
   height: 50px;
   width: 40px;
@@ -261,11 +259,6 @@ html {
   top: 15px;
 }
 
-#search-button:hover i {
-  opacity: 0.6;
-  transform: rotate(180deg);
-}
-
 #search-button:hover,
 .fullscreen-close:hover {
   opacity: 0.6;
@@ -282,6 +275,11 @@ html {
 }
 #fullscreen-search-input:focus {
   box-shadow: 0px 3px 0px 0px rgba(255, 255, 255, 0.54) !important;
+}
+
+.suggestion-item {
+  color: #ccc;
+  font-size: 2.4rem;
 }
 
 /* Media Queries Part Copied */

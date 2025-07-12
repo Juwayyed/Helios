@@ -18,6 +18,120 @@
   </head>
 
   <body id="body">
+    <!-- Card Container Start -->
+    <div class="container">
+      <div class="glass-card open" id="card_front">
+        <h2 id="card-title"></h2>
+        <div id="show-weather-btn" title="Hourly Forecast">
+          <i class="fa-solid fa-circle-info" id="toggleIcon"></i>
+        </div>
+        <img id="weather-icon" src="/img/Icons/Day/Clear-Sunny-Day.png" />
+        <p id="weather_description"></p>
+        <hr />
+        <p id="dayShift"></p>
+        <hr />
+        <p id="temperature-text"></p>
+        <hr />
+        <p id="date_text"></p>
+        <hr />
+        <p id="sunrise_text"></p>
+      </div>
+
+      <div class="glass-card hidden" id="card_back">
+        <h2 id="card-title-back">Weather per Hour</h2>
+        <div id="show-weather-btn" title="Hourly Forecast">
+          <i class="fa-solid fa-window-close" id="toggleIconClose"></i>
+        </div>
+
+        <!-- HTML Table-->
+        <div class="four-columns">
+          <div class="column">
+            <div class="cell" id="cell_1"></div>
+            <div class="cell" id="cell_2"></div>
+            <div class="cell" id="cell_3"></div>
+            <div class="cell" id="cell_4"></div>
+            <div class="cell" id="cell_5"></div>
+            <div class="cell" id="cell_6"></div>
+          </div>
+
+          <div class="column">
+            <div class="cell" id="cell_7"></div>
+            <div class="cell" id="cell_8"></div>
+            <div class="cell" id="cell_9"></div>
+            <div class="cell" id="cell_10"></div>
+            <div class="cell" id="cell_11"></div>
+            <div class="cell" id="cell_12"></div>
+          </div>
+
+          <div class="column">
+            <div class="cell" id="cell_13"></div>
+            <div class="cell" id="cell_14"></div>
+            <div class="cell" id="cell_15"></div>
+            <div class="cell" id="cell_16"></div>
+            <div class="cell" id="cell_17"></div>
+            <div class="cell" id="cell_18"></div>
+          </div>
+
+          <div class="column">
+            <div class="cell" id="cell_19"></div>
+            <div class="cell" id="cell_20"></div>
+            <div class="cell" id="cell_21"></div>
+            <div class="cell" id="cell_22"></div>
+            <div class="cell" id="cell_23"></div>
+            <div class="cell" id="cell_24"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Card Container End-->
+
+    <!-- Weekly Cards Start-->
+    <div class="week-container open" id="week-container">
+      <!-- Day 1-->
+      <div class="week-card">
+        <img id="weather-icon-week--1" class="weather-icon-week" src="#" />
+        <p id="date-text-week--1" class="date_text"></p>
+      </div>
+
+      <!-- Day 2-->
+      <div class="week-card">
+        <img id="weather-icon-week--2" class="weather-icon-week" src="#" />
+        <p id="date-text-week--2" class="date_text"></p>
+      </div>
+
+      <!-- Day 3-->
+      <div class="week-card">
+        <img id="weather-icon-week--3" class="weather-icon-week" src="#" />
+        <p id="date-text-week--3" class="date_text"></p>
+      </div>
+
+      <!-- Day 4-->
+      <div class="week-card">
+        <img id="weather-icon-week--4" class="weather-icon-week" src="#" />
+        <p id="date-text-week--4" class="date_text"></p>
+      </div>
+
+      <!-- Day 5-->
+      <div class="week-card">
+        <img id="weather-icon-week--5" class="weather-icon-week" src="#" />
+        <p id="date-text-week--5" class="date_text"></p>
+      </div>
+
+      <!-- Day 6-->
+      <div class="week-card">
+        <img id="weather-icon-week--6" class="weather-icon-week" src="#" />
+        <p id="date-text-week--6" class="date_text"></p>
+      </div>
+
+      <!-- Day 7-->
+      <div class="week-card">
+        <img id="weather-icon-week--7" class="weather-icon-week" src="#" />
+        <p id="date-text-week--7" class="date_text"></p>
+      </div>
+    </div>
+    <!-- Weekly Cards End-->
+
+    <!-- Search Section-->
     <div class="overlay">
       <a
         class="search-trigger fullscreen-trigger"
@@ -28,120 +142,6 @@
           <i class="fa fa-search" id="fa-search"></i>
         </div>
       </a>
-      <!-- Card Container Start -->
-      <div class="container">
-        <div class="glass-card open" id="card_front">
-          <h2 id="card-title"></h2>
-          <div id="show-weather-btn" title="Hourly Forecast">
-            <i class="fa-solid fa-circle-info" id="toggleIcon"></i>
-          </div>
-          <img id="weather-icon" src="/img/Icons/Day/Clear-Sunny-Day.png" />
-          <p id="weather_description"></p>
-          <hr />
-          <p id="dayShift"></p>
-          <hr />
-          <p id="temperature-text"></p>
-          <hr />
-          <p id="date_text"></p>
-          <hr />
-          <p id="sunrise_text"></p>
-        </div>
-
-        <div class="glass-card hidden" id="card_back">
-          <h2 id="card-title-back">Weather per Hour</h2>
-          <div id="show-weather-btn" title="Hourly Forecast">
-            <i class="fa-solid fa-window-close" id="toggleIconClose"></i>
-          </div>
-
-          <!-- HTML Table-->
-          <div class="four-columns">
-            <div class="column">
-              <div class="cell" id="cell_1"></div>
-              <div class="cell" id="cell_2"></div>
-              <div class="cell" id="cell_3"></div>
-              <div class="cell" id="cell_4"></div>
-              <div class="cell" id="cell_5"></div>
-              <div class="cell" id="cell_6"></div>
-            </div>
-
-            <div class="column">
-              <div class="cell" id="cell_7"></div>
-              <div class="cell" id="cell_8"></div>
-              <div class="cell" id="cell_9"></div>
-              <div class="cell" id="cell_10"></div>
-              <div class="cell" id="cell_11"></div>
-              <div class="cell" id="cell_12"></div>
-            </div>
-
-            <div class="column">
-              <div class="cell" id="cell_13"></div>
-              <div class="cell" id="cell_14"></div>
-              <div class="cell" id="cell_15"></div>
-              <div class="cell" id="cell_16"></div>
-              <div class="cell" id="cell_17"></div>
-              <div class="cell" id="cell_18"></div>
-            </div>
-
-            <div class="column">
-              <div class="cell" id="cell_19"></div>
-              <div class="cell" id="cell_20"></div>
-              <div class="cell" id="cell_21"></div>
-              <div class="cell" id="cell_22"></div>
-              <div class="cell" id="cell_23"></div>
-              <div class="cell" id="cell_24"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Card Container End-->
-
-      <!-- Weekly Cards Start-->
-      <div class="week-container open" id="week-container">
-        <!-- Day 1-->
-        <div class="week-card">
-          <img id="weather-icon-week--1" class="weather-icon-week" src="#" />
-          <p id="date-text-week--1" class="date_text"></p>
-        </div>
-
-        <!-- Day 2-->
-        <div class="week-card">
-          <img id="weather-icon-week--2" class="weather-icon-week" src="#" />
-          <p id="date-text-week--2" class="date_text"></p>
-        </div>
-
-        <!-- Day 3-->
-        <div class="week-card">
-          <img id="weather-icon-week--3" class="weather-icon-week" src="#" />
-          <p id="date-text-week--3" class="date_text"></p>
-        </div>
-
-        <!-- Day 4-->
-        <div class="week-card">
-          <img id="weather-icon-week--4" class="weather-icon-week" src="#" />
-          <p id="date-text-week--4" class="date_text"></p>
-        </div>
-
-        <!-- Day 5-->
-        <div class="week-card">
-          <img id="weather-icon-week--5" class="weather-icon-week" src="#" />
-          <p id="date-text-week--5" class="date_text"></p>
-        </div>
-
-        <!-- Day 6-->
-        <div class="week-card">
-          <img id="weather-icon-week--6" class="weather-icon-week" src="#" />
-          <p id="date-text-week--6" class="date_text"></p>
-        </div>
-
-        <!-- Day 7-->
-        <div class="week-card">
-          <img id="weather-icon-week--7" class="weather-icon-week" src="#" />
-          <p id="date-text-week--7" class="date_text"></p>
-        </div>
-      </div>
-      <!-- Weekly Cards End-->
-
-      <!-- Search Section-->
       <div class="fullscreen-search-overlay" id="search-overlay">
         <a href="#" class="fullscreen-close" id="fullscreen-close-button"
           ><i class="fa fa-times"></i
@@ -151,9 +151,10 @@
             <input
               type="text"
               value=""
-              placeholder="Search..."
+              placeholder="Search a place..."
               id="fullscreen-search-input"
             />
+            <div class="suggestions-box" id="suggestions-box"></div>
             <i class="fa fa-search fullscreen-search-icon"
               ><input value="" type="submit"
             /></i>
