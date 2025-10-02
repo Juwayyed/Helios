@@ -30,7 +30,7 @@ if (navigator.geolocation)
         const snowfall_current = data.current.snowfall;
 
         const daytime_current = data.current.is_day;
-        const daytime_hourly = data.current.is_day;
+        const daytime_hourly = data.hourly.is_day;
 
         const sunrise = data.daily.sunrise;
         const sunset = data.daily.sunset;
@@ -48,6 +48,8 @@ if (navigator.geolocation)
 
         const card_front = document.getElementById("card_front");
         const card_back = document.getElementById("card_back");
+
+        let tableImg;
 
         //Days of The Week
         const days = [
@@ -77,13 +79,101 @@ if (navigator.geolocation)
           card_back.classList.add("open");
           frontCardVisible = !frontCardVisible;
 
+          /* Function for Setting Table 24 Icons */
+
+          const tableIcons = function (
+            daytime_hourly,
+            rain_hourly,
+            showers_hourly,
+            clouds_hourly,
+            snowfall_hourly
+          ) {
+            if (daytime_hourly && rain_hourly && showers_hourly) {
+              tableImg = `<img class="table-icon" src="/img/Icons/Day/Storm-Day.png">`;
+            } else if (daytime_hourly && rain_hourly && !showers_hourly) {
+              tableImg = `<img class="table-icon" src="/img/Icons/Day/Rainy-Day.png">`;
+            } else if (
+              daytime_hourly &&
+              !rain_hourly &&
+              !showers_hourly &&
+              clouds_hourly <= 20
+            ) {
+              tableImg = `<img class="table-icon" src="/img/Icons/Day/Partly-Cloudy-Day.png">`;
+            } else if (
+              daytime_hourly &&
+              !rain_hourly &&
+              !showers_hourly &&
+              clouds_hourly > 20
+            ) {
+              tableImg = `<img class="table-icon" src="/img/Icons/Day/Cloudy-Day.png">`;
+            } else if (
+              daytime_hourly &&
+              !rain_hourly &&
+              !showers_hourly &&
+              !clouds_hourly &&
+              !snowfall_hourly
+            ) {
+              tableImg = `<img class="table-icon" src="/img/Icons/Day/Clear-Sunny-Day.png">`;
+            } else if (
+              daytime_hourly &&
+              !rain_hourly &&
+              !showers_hourly &&
+              snowfall_hourly
+            ) {
+              tableImg = `<img class="table-icon" src="/img/Icons/Day/Snowy-Day.png">`;
+            } else if (!daytime_hourly && rain_hourly && showers_hourly) {
+              tableImg = `<img class="table-icon" src="/img/Icons/Night/Storm-Night.png">`;
+            } else if (!daytime_hourly && rain_hourly && !showers_hourly) {
+              tableImg = `<img class="table-icon" src="/img/Icons/Night/Raining-Cloudy-Night.png">`;
+            } else if (
+              !daytime_hourly &&
+              !rain_hourly &&
+              !showers_hourly &&
+              clouds_hourly <= 20
+            ) {
+              tableImg = `<img class="table-icon" src="/img/Icons/Night/Partly-Cloudy-Night.png">`;
+            } else if (
+              !daytime_hourly &&
+              !rain_hourly &&
+              !showers_hourly &&
+              clouds_hourly > 20
+            ) {
+              tableImg = `<img class="table-icon" src="/img/Icons/Night/Cloudy-Night.png">`;
+            } else if (
+              !daytime_hourly &&
+              !rain_hourly &&
+              !showers_hourly &&
+              !clouds_hourly &&
+              !snowfall_hourly
+            ) {
+              tableImg = `<img class="table-icon" src="/img/Icons/Night/Clear-Sky-Night.png">`;
+            } else if (
+              !daytime_hourly &&
+              !rain_hourly &&
+              !showers_hourly &&
+              snowfall_hourly
+            ) {
+              tableImg = `<img class="table-icon" src="/img/Icons/Night/Snowy-Night.png">`;
+            }
+            return tableImg;
+          };
+
+          /* End of Function for Setting Table 24 Icons */
+
           /* Loop For Populating The Today Table - Back Card */
           //times_hourly
           //temperature_hourly
           for (let i = 1; i < 25; i++) {
             let HourlyTodayData = (document.getElementById(
               `cell_${i}`
-            ).innerHTML = `${timeIcon} ${times_hourly[i].slice(
+            ).innerHTML = ` ${tableIcons(
+              daytime_hourly[i],
+              rain_hourly[i],
+              showers_hourly[i],
+              clouds_hourly[i],
+              snowfall_hourly[i]
+            )}
+            | ${timeIcon} ${times_hourly[i].slice(
               11,
               16
             )} | ${tempIcon} Temperature: ${temperature_hourly[i]}   `);

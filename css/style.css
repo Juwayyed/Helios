@@ -793,21 +793,24 @@ hr {
 /* New Experimental */
 /* HTML Table */
 .four-columns {
-  display: flex;
-  gap: 20px;
-}
-
-.column {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(6, auto);
+  gap: 15px;
 }
 
 .cell {
+  width: 100%;
   height: auto;
   border-bottom: 1px solid #ccc;
+  border-radius: 6px;
 }
 
 .column .cell:last-child {
   border-bottom: none;
+}
+
+.table-icon {
+  width: 20px;
+  height: auto;
 }
