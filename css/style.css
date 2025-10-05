@@ -322,6 +322,8 @@ html {
   opacity: 1;
   z-index: 1;
   display: block;
+  height: auto;
+  max-height: 60%;
 }
 
 /* Hidden state */
@@ -804,6 +806,8 @@ hr {
   height: auto;
   border-bottom: 1px solid #ccc;
   border-radius: 6px;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
 .column .cell:last-child {
@@ -811,6 +815,6 @@ hr {
 }
 
 .table-icon {
-  width: 20px;
-  height: auto;
+  width: auto;
+  height: 20px;
 }

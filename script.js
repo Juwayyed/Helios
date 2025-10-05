@@ -72,113 +72,107 @@ if (navigator.geolocation)
         /* Card open & Close */
         let frontCardVisible = true;
 
+        const tableIcons = function (
+          daytime_hourly,
+          rain_hourly,
+          showers_hourly,
+          clouds_hourly,
+          snowfall_hourly
+        ) {
+          if (daytime_hourly && rain_hourly && showers_hourly) {
+            tableImg = `<img class="table-icon" src="/img/Icons/Day/Storm-Day.png">`;
+          } else if (daytime_hourly && rain_hourly && !showers_hourly) {
+            tableImg = `<img class="table-icon" src="/img/Icons/Day/Rainy-Day.png">`;
+          } else if (
+            daytime_hourly &&
+            !rain_hourly &&
+            !showers_hourly &&
+            clouds_hourly <= 20
+          ) {
+            tableImg = `<img class="table-icon" src="/img/Icons/Day/Partly-Cloudy-Day.png">`;
+          } else if (
+            daytime_hourly &&
+            !rain_hourly &&
+            !showers_hourly &&
+            clouds_hourly > 20
+          ) {
+            tableImg = `<img class="table-icon" src="/img/Icons/Day/Cloudy-Day.png">`;
+          } else if (
+            daytime_hourly &&
+            !rain_hourly &&
+            !showers_hourly &&
+            !clouds_hourly &&
+            !snowfall_hourly
+          ) {
+            tableImg = `<img class="table-icon" src="/img/Icons/Day/Clear-Sunny-Day.png">`;
+          } else if (
+            daytime_hourly &&
+            !rain_hourly &&
+            !showers_hourly &&
+            snowfall_hourly
+          ) {
+            tableImg = `<img class="table-icon" src="/img/Icons/Day/Snowy-Day.png">`;
+          } else if (!daytime_hourly && rain_hourly && showers_hourly) {
+            tableImg = `<img class="table-icon" src="/img/Icons/Night/Storm-Night.png">`;
+          } else if (!daytime_hourly && rain_hourly && !showers_hourly) {
+            tableImg = `<img class="table-icon" src="/img/Icons/Night/Raining-Cloudy-Night.png">`;
+          } else if (
+            !daytime_hourly &&
+            !rain_hourly &&
+            !showers_hourly &&
+            clouds_hourly <= 20
+          ) {
+            tableImg = `<img class="table-icon" src="/img/Icons/Night/Partly-Cloudy-Night.png">`;
+          } else if (
+            !daytime_hourly &&
+            !rain_hourly &&
+            !showers_hourly &&
+            clouds_hourly > 20
+          ) {
+            tableImg = `<img class="table-icon" src="/img/Icons/Night/Cloudy-Night.png">`;
+          } else if (
+            !daytime_hourly &&
+            !rain_hourly &&
+            !showers_hourly &&
+            !clouds_hourly &&
+            !snowfall_hourly
+          ) {
+            tableImg = `<img class="table-icon" src="/img/Icons/Night/Clear-Sky-Night.png">`;
+          } else if (
+            !daytime_hourly &&
+            !rain_hourly &&
+            !showers_hourly &&
+            snowfall_hourly
+          ) {
+            tableImg = `<img class="table-icon" src="/img/Icons/Night/Snowy-Night.png">`;
+          }
+          return tableImg;
+        };
+
         icon.addEventListener("click", () => {
           card_front.classList.remove("open");
           card_front.classList.add("hidden");
           card_back.classList.remove("hidden");
           card_back.classList.add("open");
           frontCardVisible = !frontCardVisible;
-
-          /* Function for Setting Table 24 Icons */
-
-          const tableIcons = function (
-            daytime_hourly,
-            rain_hourly,
-            showers_hourly,
-            clouds_hourly,
-            snowfall_hourly
-          ) {
-            if (daytime_hourly && rain_hourly && showers_hourly) {
-              tableImg = `<img class="table-icon" src="/img/Icons/Day/Storm-Day.png">`;
-            } else if (daytime_hourly && rain_hourly && !showers_hourly) {
-              tableImg = `<img class="table-icon" src="/img/Icons/Day/Rainy-Day.png">`;
-            } else if (
-              daytime_hourly &&
-              !rain_hourly &&
-              !showers_hourly &&
-              clouds_hourly <= 20
-            ) {
-              tableImg = `<img class="table-icon" src="/img/Icons/Day/Partly-Cloudy-Day.png">`;
-            } else if (
-              daytime_hourly &&
-              !rain_hourly &&
-              !showers_hourly &&
-              clouds_hourly > 20
-            ) {
-              tableImg = `<img class="table-icon" src="/img/Icons/Day/Cloudy-Day.png">`;
-            } else if (
-              daytime_hourly &&
-              !rain_hourly &&
-              !showers_hourly &&
-              !clouds_hourly &&
-              !snowfall_hourly
-            ) {
-              tableImg = `<img class="table-icon" src="/img/Icons/Day/Clear-Sunny-Day.png">`;
-            } else if (
-              daytime_hourly &&
-              !rain_hourly &&
-              !showers_hourly &&
-              snowfall_hourly
-            ) {
-              tableImg = `<img class="table-icon" src="/img/Icons/Day/Snowy-Day.png">`;
-            } else if (!daytime_hourly && rain_hourly && showers_hourly) {
-              tableImg = `<img class="table-icon" src="/img/Icons/Night/Storm-Night.png">`;
-            } else if (!daytime_hourly && rain_hourly && !showers_hourly) {
-              tableImg = `<img class="table-icon" src="/img/Icons/Night/Raining-Cloudy-Night.png">`;
-            } else if (
-              !daytime_hourly &&
-              !rain_hourly &&
-              !showers_hourly &&
-              clouds_hourly <= 20
-            ) {
-              tableImg = `<img class="table-icon" src="/img/Icons/Night/Partly-Cloudy-Night.png">`;
-            } else if (
-              !daytime_hourly &&
-              !rain_hourly &&
-              !showers_hourly &&
-              clouds_hourly > 20
-            ) {
-              tableImg = `<img class="table-icon" src="/img/Icons/Night/Cloudy-Night.png">`;
-            } else if (
-              !daytime_hourly &&
-              !rain_hourly &&
-              !showers_hourly &&
-              !clouds_hourly &&
-              !snowfall_hourly
-            ) {
-              tableImg = `<img class="table-icon" src="/img/Icons/Night/Clear-Sky-Night.png">`;
-            } else if (
-              !daytime_hourly &&
-              !rain_hourly &&
-              !showers_hourly &&
-              snowfall_hourly
-            ) {
-              tableImg = `<img class="table-icon" src="/img/Icons/Night/Snowy-Night.png">`;
-            }
-            return tableImg;
-          };
-
-          /* End of Function for Setting Table 24 Icons */
-
-          /* Loop For Populating The Today Table - Back Card */
-          //times_hourly
-          //temperature_hourly
-          for (let i = 1; i < 25; i++) {
-            let HourlyTodayData = (document.getElementById(
-              `cell_${i}`
-            ).innerHTML = ` ${tableIcons(
-              daytime_hourly[i],
-              rain_hourly[i],
-              showers_hourly[i],
-              clouds_hourly[i],
-              snowfall_hourly[i]
-            )}
-            | ${timeIcon} ${times_hourly[i].slice(
-              11,
-              16
-            )} | ${tempIcon} Temperature: ${temperature_hourly[i]}   `);
-          }
         });
+
+        /* Loop For Populating The Today Table - Back Card */
+        for (let i = 0; i < 24; i++) {
+          let HourlyTodayData = (document.getElementById(
+            `cell_${i + 1}`
+          ).innerHTML = ` ${tableIcons(
+            daytime_hourly[i],
+            rain_hourly[i],
+            showers_hourly[i],
+            clouds_hourly[i],
+            snowfall_hourly[i]
+          )}
+            | ${timeIcon} ${times_hourly[i].slice(
+            11,
+            16
+          )} | ${tempIcon} Temperature: ${temperature_hourly[i]}   `);
+        }
 
         //Close Icon
         iconClose.addEventListener("click", () => {
@@ -280,6 +274,8 @@ if (navigator.geolocation)
               return days[date.getDay()];
             });
 
+            console.log(weekDays);
+
             const currentDateObj = new Date(date_current);
             const options = { month: "long", day: "numeric" };
             const formattedCurrentDate = currentDateObj.toLocaleDateString(
@@ -327,7 +323,6 @@ if (navigator.geolocation)
               ).innerHTML = `${weekDays[i]}<br>${weekDatesObj}`;
             }
 
-            /////////////////////////
             /******************** Current Day Forecast ***********************/
             if (daytime_current && rain_current && showers_current) {
               document.getElementById(
@@ -537,8 +532,40 @@ if (navigator.geolocation)
               }
             });
 
-            // Week Bottom Bar Time & Date Formatting
-            console.log(dates_weekly);
+            /* Weekdays Cards Click Events - Change Date Data Accordingly */
+
+            for (let i = 1; i < 8; i++) {
+              console.log(`weekday-${i}`);
+              document
+                .getElementById(`weekday-${i}`)
+                .addEventListener("click", () => {
+                  //I need to Modifty the date according to the value of "i" [dates_weekly]
+                  card_front.classList.remove("open");
+                  card_front.classList.add("hidden");
+                  card_back.classList.remove("hidden");
+                  card_back.classList.add("open");
+                  frontCardVisible = !frontCardVisible;
+                });
+
+              const date = dates_weekly[i];
+
+              for (let j = 0; j < 24; j++) {
+                let HourlyDayData = (document.getElementById(
+                  `cell_${j + 1}`
+                ).innerHTML = ` ${tableIcons(
+                  daytime_hourly[j],
+                  rain_hourly[j],
+                  showers_hourly[j],
+                  clouds_hourly[j],
+                  snowfall_hourly[j]
+                )} | ${timeIcon} ${times_hourly[j].slice(
+                  11,
+                  16
+                )} | ${tempIcon} Temperature: ${temperature_hourly[j]}   `);
+              }
+            }
+
+            /* End of Weekdays Cards Click Events */
 
             ////////////////////////////////////////////////////////////////////////////////
             ///////////////////////////////////////////////////////////////////////////////
@@ -593,7 +620,6 @@ if (navigator.geolocation)
           });
       });
   });
-
 /* Function to Separate (Hour From Date) & (Sunrise or Sunset From Date) Week-Based or Current */
 // Use: timeSpan(times_current, printCurrentTiming); //For Current Time & Date
 // Use: timeSpan(times_hourly, printWeeklyTiming); //For Weekly-Hourly Time & Date
