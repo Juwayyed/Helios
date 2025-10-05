@@ -308,8 +308,6 @@ html {
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  /*position: absolute;
-  top: 1rem;*/
 }
 
 .glass-card h2 {
@@ -327,7 +325,6 @@ html {
 }
 
 /* Hidden state */
-
 .hidden {
   visibility: hidden;
   opacity: 0;
@@ -338,7 +335,7 @@ html {
 #card_back {
   height: auto;
   max-height: 60%;
-  width: 60vw;
+  width: 70vw;
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -350,6 +347,11 @@ html {
   align-items: center;
   overflow: hidden;
   position: absolute;
+}
+
+#card-title-back {
+  margin-bottom: 2rem;
+  padding-top: 4rem;
 }
 
 .week-container {
@@ -426,86 +428,6 @@ hr {
   transform: scale(1.2);
 }
 /*************** Media Queries **************/
-/*
-@media (min-width: 320px) {
-}
-
-@media (min-width: 481px) {
-}
-
-@media (min-width: 768px) {
-}
-
-@media (min-width: 992px) {
-}
-
-@media (min-width: 1200px) {
-  .glass-card {
-    top: 3rem;
-    left: calc((100vw - 400px) / 2);
-    width: 40rem;
-    border-radius: 2rem;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.37);
-    padding: 20px;
-  }
-
-  .glass-card h2 {
-    margin-top: 2rem;
-    font-size: 2rem;
-  }
-
-  .week-container {
-    left: 50%;
-    bottom: 1rem;
-    max-height: 30%;
-    gap: 5px;
-  }
-
-  .week-card {
-    width: 10rem;
-    height: 12rem;
-    border-radius: 2px;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.37);
-  }
-
-  .weather-icon-week {
-    width: 8rem;
-    height: 8rem;
-  }
-
-  #weather-icon {
-    margin-top: 1rem;
-    width: 25rem;
-    height: auto;
-  }
-
-  #temperature-text,
-  #date_text,
-  #time-text,
-  #dayShift,
-  #weather_description,
-  #sunrise_text,
-  #sunset_text {
-    font-size: 1.5rem;
-  }
-
-  hr {
-    height: 1px;
-    margin: 5px 0;
-  }
-}
-
-@media (min-width: 1440px) {
-}
-
-@media (min-width: 1920px) {
-}
-*/
-
-/* Gemini */
-
 /* =================================== */
 /* 1. Small Mobile (320px and up)      */
 /* Base styles - stacked and fluid     */
@@ -551,7 +473,7 @@ hr {
 
   #weather-icon {
     margin-top: 1rem;
-    width: 12rem; /* Significantly smaller icon */
+    width: 12rem;
   }
 
   #temperature-text,
@@ -572,7 +494,6 @@ hr {
 
 /* =================================== */
 /* 2. Large Mobile (481px and up)      */
-/* Slightly larger elements            */
 /* =================================== */
 @media (min-width: 481px) {
   .glass-card {
@@ -618,7 +539,7 @@ hr {
     transform: translateX(-50%);
     bottom: 2rem;
     width: auto;
-    overflow-x: visible; /* No more scrolling */
+    overflow-x: visible;
     gap: 10px;
   }
 
@@ -649,7 +570,6 @@ hr {
 
 /* =================================== */
 /* 4. Small Desktop (992px and up)     */
-/* Closer to the final design          */
 /* =================================== */
 @media (min-width: 992px) {
   .glass-card {
@@ -673,7 +593,6 @@ hr {
 
 /* =================================== */
 /* 5. Standard Desktop (1200px and up) */
-/* This is YOUR provided code          */
 /* =================================== */
 @media (min-width: 1200px) {
   .glass-card {
@@ -705,7 +624,7 @@ hr {
   .week-card {
     width: 10rem;
     height: 12rem;
-    border-radius: 2rem; /* Your code had 2px, 2rem seems more consistent */
+    border-radius: 2rem;
     backdrop-filter: blur(10px);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.37);
   }
@@ -810,11 +729,17 @@ hr {
   padding-bottom: 1rem;
 }
 
+.cell-text {
+  font-size: 12px;
+  align-content: center;
+  display: inline-block;
+}
+
 .column .cell:last-child {
   border-bottom: none;
 }
 
 .table-icon {
   width: auto;
-  height: 20px;
+  height: 25px;
 }

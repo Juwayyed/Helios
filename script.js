@@ -14,6 +14,8 @@ if (navigator.geolocation)
 
         const dates_weekly = data.daily.time;
 
+        const is_day = data.hourly.is_day;
+
         const times_hourly = data.hourly.time;
         const times_current = data.current.time;
 
@@ -155,6 +157,8 @@ if (navigator.geolocation)
           card_back.classList.remove("hidden");
           card_back.classList.add("open");
           frontCardVisible = !frontCardVisible;
+          document.getElementById("card-title-back").innerHTML =
+            "Weather Per Hour for Today!";
         });
 
         /* Loop For Populating The Today Table - Back Card */
@@ -168,10 +172,10 @@ if (navigator.geolocation)
             clouds_hourly[i],
             snowfall_hourly[i]
           )}
-            | ${timeIcon} ${times_hourly[i].slice(
+            <span class="cell-text"> | ${timeIcon} ${times_hourly[i].slice(
             11,
             16
-          )} | ${tempIcon} Temperature: ${temperature_hourly[i]}   `);
+          )} | ${tempIcon} Temperature: ${temperature_hourly[i]}   </span>`);
         }
 
         //Close Icon
@@ -484,9 +488,8 @@ if (navigator.geolocation)
               body.backgroundImage =
                 "url('/img/BGs/Night/Snowy-Night-BG 1920x1080.jpg')";
             }
-            ////////////////////////////////////////////////////////////////////////////////
-            ///////////////////////////////////////////////////////////////////////////////
-            ///////////////////// Weekly Forecast icon change /////////////////////////////
+
+            /************************ Weekly Forecast icon change ************************/
 
             const daily10Data = index10Hour.map((index) => ({
               time: times_hourly[index],
@@ -533,55 +536,73 @@ if (navigator.geolocation)
             });
 
             /* Weekdays Cards Click Events - Change Date Data Accordingly */
+            // Function to Get the Data of a Specific Date
+            const getDayData = (dateStr) => {
+              return times_hourly
+                .map((time, index) => ({
+                  time,
+                  temp: temperature_hourly[index],
+                  rain: rain_hourly[index],
+                  showers: showers_hourly[index],
+                  clouds: clouds_hourly[index],
+                  snowfall: snowfall_hourly[index],
+                  daytime: is_day[index] === 1,
+                }))
+                .filter((entry) => entry.time.startsWith(dateStr));
+            };
+
+            console.log(getDayData(dates_weekly[0]));
 
             for (let i = 1; i < 8; i++) {
-              console.log(`weekday-${i}`);
               document
                 .getElementById(`weekday-${i}`)
                 .addEventListener("click", () => {
-                  //I need to Modifty the date according to the value of "i" [dates_weekly]
+                  const dateStr = dates_weekly[i - 1];
+                  const dayData = getDayData(dateStr);
+
+                  // Clearing Previous Cells
+                  document
+                    .querySelectorAll(".cell")
+                    .forEach((cell) => (cell.innerHTML = ""));
+
+                  dayData.forEach((hour, j) => {
+                    document.getElementById(`cell_${j + 1}`).innerHTML = `
+                    ${tableIcons(
+                      hour.daytime,
+                      hour.rain,
+                      hour.showers,
+                      hour.clouds,
+                      hour.snowfall
+                    )} <span class="cell-text">|
+                    ${timeIcon} ${hour.time.slice(11, 16)} |
+                    ${tempIcon} Temperature: ${hour.temp}</span>
+                    `;
+                  });
+
                   card_front.classList.remove("open");
                   card_front.classList.add("hidden");
                   card_back.classList.remove("hidden");
                   card_back.classList.add("open");
                   frontCardVisible = !frontCardVisible;
+                  document.getElementById(
+                    "card-title-back"
+                  ).innerHTML = `Weather Per Hour for ${dateStr}`;
                 });
-
-              const date = dates_weekly[i];
-
-              for (let j = 0; j < 24; j++) {
-                let HourlyDayData = (document.getElementById(
-                  `cell_${j + 1}`
-                ).innerHTML = ` ${tableIcons(
-                  daytime_hourly[j],
-                  rain_hourly[j],
-                  showers_hourly[j],
-                  clouds_hourly[j],
-                  snowfall_hourly[j]
-                )} | ${timeIcon} ${times_hourly[j].slice(
-                  11,
-                  16
-                )} | ${tempIcon} Temperature: ${temperature_hourly[j]}   `);
-              }
             }
-
             /* End of Weekdays Cards Click Events */
 
-            ////////////////////////////////////////////////////////////////////////////////
-            ///////////////////////////////////////////////////////////////////////////////
-            ///////////////////// Hourly (Today) Forecast icon change /////////////////////////////
+            /************************ Hourly (Today) Forecast icon change ***************************/
             /**
- /**
- * Determine the weather icon based on given conditions.
- * 
- * @param {object} conditions
- * @param {number} conditions.rain
- * @param {number} conditions.showers
- * @param {number} conditions.clouds
- * @param {number} conditions.snowfall
- * @param {boolean} conditions.isDay
- * @returns {string} Path to the appropriate weather icon
- */
+             * Determine the weather icon based on given conditions.
+             *
+             * @param {object} conditions
+             * @param {number} conditions.rain
+             * @param {number} conditions.showers
+             * @param {number} conditions.clouds
+             * @param {number} conditions.snowfall
+             * @param {boolean} conditions.isDay
+             * @returns {string} Path to the appropriate weather icon
+             */
             function getIconPath(conditions) {
               const { rain, showers, clouds, snowfall, isDay } = conditions;
 
@@ -629,15 +650,7 @@ if (navigator.geolocation)
 // Use: timeSpan(sunset, printWeeklySunset); //For Weekly Sunset & Date
 // Must call function with an argument
 
-/* Toggle Button Between Today & Week */
-
-/************************************************* New *************************************************/
-/********************************************************************************************************/
-/********************************************************************************************************/
-/********************************************************************************************************/
-/********************************************************************************************************/
-/********************************************************************************************************/
-//* Search Bar */
+/********************************************* Search Bar *********************************************/
 let wHeight = window.innerHeight;
 const sb = document.getElementById("search-button");
 const closeSB = document.getElementById("fullscreen-close-button");
@@ -645,12 +658,10 @@ const SearchOverlay = document.getElementById("search-overlay");
 const searchBar = document.getElementById("fullscreen-searchform");
 
 searchBar.style.top = wHeight / 2 + "px";
-//console.log(wHeight);
 
 window.addEventListener(
   "resize",
   function () {
-    //console.log(wHeight);
     wHeight = window.innerHeight;
     searchBar.style.top = wHeight / 2 + "px";
   },
@@ -702,7 +713,7 @@ searchInput.addEventListener("input", async (e) => {
       suggestionItem.addEventListener("click", () => {
         searchInput.value = feature.properties.formatted;
         suggestionsBox.innerHTML = "";
-        // Optional: Trigger your weather search function here
+        // Optional: Trigger our weather search function here
       });
 
       suggestionsBox.appendChild(suggestionItem);
