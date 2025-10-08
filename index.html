@@ -6,8 +6,14 @@
       content="width=device-width, initial-scale=1.0"
       charset="UTF-8"
     />
-    <title>Helios Weather App</title>
+    <title>Helios | Weather App</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="/img/favicon.ico"
+      type="image/ico"
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -18,8 +24,20 @@
   </head>
 
   <body id="body">
+    <div id="loading-overlay">
+      <div class="loader"></div>
+      <p>Loading weather data...</p>
+    </div>
     <!-- Card Container Start -->
-    <div class="container">
+    <div class="container" id="main-content">
+      <div class="logo">
+        <img
+          id="logo-img"
+          alt="Hand-drawn Logo of the Sun"
+          src="img/Logo/Logo.png"
+        />
+        <h1 id="logo-text">H e l i o s</h1>
+      </div>
       <div class="glass-card open" id="card_front">
         <h2 id="card-title"></h2>
         <div id="show-weather-btn" title="Hourly Forecast">
@@ -38,48 +56,37 @@
       </div>
 
       <div class="glass-card hidden" id="card_back">
-        <h2 id="card-title-back">Weather per Hour</h2>
+        <h2 id="card-title-back"></h2>
         <div id="show-weather-btn" title="Hourly Forecast">
           <i class="fa-solid fa-window-close" id="toggleIconClose"></i>
         </div>
 
         <!-- HTML Table-->
         <div class="four-columns">
-          <div class="column">
-            <div class="cell" id="cell_1"></div>
-            <div class="cell" id="cell_2"></div>
-            <div class="cell" id="cell_3"></div>
-            <div class="cell" id="cell_4"></div>
-            <div class="cell" id="cell_5"></div>
-            <div class="cell" id="cell_6"></div>
-          </div>
-
-          <div class="column">
-            <div class="cell" id="cell_7"></div>
-            <div class="cell" id="cell_8"></div>
-            <div class="cell" id="cell_9"></div>
-            <div class="cell" id="cell_10"></div>
-            <div class="cell" id="cell_11"></div>
-            <div class="cell" id="cell_12"></div>
-          </div>
-
-          <div class="column">
-            <div class="cell" id="cell_13"></div>
-            <div class="cell" id="cell_14"></div>
-            <div class="cell" id="cell_15"></div>
-            <div class="cell" id="cell_16"></div>
-            <div class="cell" id="cell_17"></div>
-            <div class="cell" id="cell_18"></div>
-          </div>
-
-          <div class="column">
-            <div class="cell" id="cell_19"></div>
-            <div class="cell" id="cell_20"></div>
-            <div class="cell" id="cell_21"></div>
-            <div class="cell" id="cell_22"></div>
-            <div class="cell" id="cell_23"></div>
-            <div class="cell" id="cell_24"></div>
-          </div>
+          <div class="cell" id="cell_1"></div>
+          <div class="cell" id="cell_2"></div>
+          <div class="cell" id="cell_3"></div>
+          <div class="cell" id="cell_4"></div>
+          <div class="cell" id="cell_5"></div>
+          <div class="cell" id="cell_6"></div>
+          <div class="cell" id="cell_7"></div>
+          <div class="cell" id="cell_8"></div>
+          <div class="cell" id="cell_9"></div>
+          <div class="cell" id="cell_10"></div>
+          <div class="cell" id="cell_11"></div>
+          <div class="cell" id="cell_12"></div>
+          <div class="cell" id="cell_13"></div>
+          <div class="cell" id="cell_14"></div>
+          <div class="cell" id="cell_15"></div>
+          <div class="cell" id="cell_16"></div>
+          <div class="cell" id="cell_17"></div>
+          <div class="cell" id="cell_18"></div>
+          <div class="cell" id="cell_19"></div>
+          <div class="cell" id="cell_20"></div>
+          <div class="cell" id="cell_21"></div>
+          <div class="cell" id="cell_22"></div>
+          <div class="cell" id="cell_23"></div>
+          <div class="cell" id="cell_24"></div>
         </div>
       </div>
     </div>
@@ -234,6 +241,6 @@
       crossorigin="anonymous"
       defer
     ></script>
-    <script src="script.js" type="module"></script>
+    <script src="script.js" type="module" defer></script>
   </body>
 </html>

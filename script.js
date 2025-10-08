@@ -1,7 +1,19 @@
-/*
- * دالة جديدة لتغليف منطق جلب وتحديث بيانات الطقس بناءً على خطوط الطول والعرض
- * (latitude, longitude)
- */
+const loadingOverlay = document.getElementById("loading-overlay");
+const mainContent = document.getElementById("main-content");
+
+if (mainContent) {
+  mainContent.classList.add("hidden");
+}
+
+const hideLoadingScreen = () => {
+  if (loadingOverlay) {
+    loadingOverlay.classList.add("hidden");
+    if (mainContent) {
+      mainContent.classList.remove("hidden");
+    }
+  }
+};
+
 const updateWeather = (latitude, longitude) => {
   const apiURL = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,cloud_cover,rain,showers,snowfall,is_day&hourly=temperature_2m,precipitation,cloud_cover,rain,showers,snowfall,is_day&daily=sunrise,sunset&timezone=auto`;
 
@@ -165,7 +177,7 @@ const updateWeather = (latitude, longitude) => {
           <span class="cell-text"> | ${timeIcon} ${times_hourly[i].slice(
           11,
           16
-        )} | ${tempIcon} Temperature: ${temperature_hourly[i]}   </span>`);
+        )} | ${tempIcon} Temperature: ${temperature_hourly[i]} </span>`);
       }
 
       // 7 Days Data
@@ -281,7 +293,7 @@ const updateWeather = (latitude, longitude) => {
             "sunrise_text"
           ).textContent = `${sunriseIcon} Sunrise on: ${
             printCurrentTiming(sunrise[0])[0]
-          }   | ${sunsetIcon} Sunset on: ${printCurrentTiming(sunset[0])[0]}`;
+          } | ${sunsetIcon} Sunset on: ${printCurrentTiming(sunset[0])[0]}`;
 
           if (daytime_current) {
             document.getElementById(
@@ -551,7 +563,7 @@ const updateWeather = (latitude, longitude) => {
               frontCardVisible = false;
               document.getElementById(
                 "card-title-back"
-              ).innerHTML = `Weather Per Hour for ${dateStr}`;
+              ).innerHTML = `${city} - Weather Per Hour on ${dateStr}`;
             };
           }
           /* End of Weekdays Cards Click Events */
@@ -604,9 +616,11 @@ const updateWeather = (latitude, longitude) => {
             }
           }
         });
+      hideLoadingScreen();
     })
     .catch((error) => {
       console.error("Error fetching weather data:", error);
+      hideLoadingScreen();
     });
 };
 
@@ -616,7 +630,7 @@ if (navigator.geolocation)
     const { latitude } = position.coords;
     const { longitude } = position.coords;
 
-    // استدعاء دالة تحديث الطقس بالموقع الحالي
+    // Calling updateWeather() with current location
     updateWeather(latitude, longitude);
   });
 /* Function to Separate (Hour From Date) & (Sunrise or Sunset From Date) Week-Based or Current */
@@ -628,7 +642,6 @@ if (navigator.geolocation)
 // Use: timeSpan(sunset, printWeeklySunset); //For Weekly Sunset & Date
 // Must call function with an argument
 
-// **نقل الـ Event Listeners الخاصة بفتح وغلق البطاقة إلى هنا لتجنب تكرار إضافتها**
 const card_front = document.getElementById("card_front");
 const card_back = document.getElementById("card_back");
 const icon = document.getElementById("toggleIcon");
