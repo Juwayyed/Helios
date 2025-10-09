@@ -426,6 +426,10 @@ hr {
 }
 
 .cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
   width: 100%;
   height: auto;
   border-bottom: 1px solid #cccccc2a;
@@ -798,6 +802,11 @@ hr {
   .weather-icon-week {
     width: 8rem;
     height: 8rem;
+  }
+
+  .cell {
+    align-items: center;
+    justify-content: center;
   }
 
   .cell-text {
