@@ -14,6 +14,80 @@ const hideLoadingScreen = () => {
   }
 };
 
+const dateTextElement = document.getElementById("date_text");
+const cardTitleElement = document.getElementById("card-title");
+const timeIcon = "⏰";
+const calendarIcon = "📅";
+const tempIcon = "🌡️";
+const sunriseIcon = "☀️";
+const sunsetIcon = "🌒";
+
+let lastCity = "Unknown";
+let lastCountry = "Unknown";
+let current_timezone = "auto";
+let api_last_time = "";
+
+//Days of The Week
+const days = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+];
+
+// دالة تحديث الوقت كل ثانية (تعتمد على التايم زون الخاص بالمدينة)
+function updateClock() {
+  if (!dateTextElement || lastCity === "Unknown" || !api_last_time) {
+    return;
+  }
+
+  // استخدام الوقت الثابت من الـ API كمرجع
+  const now = new Date(api_last_time);
+
+  // حساب الفارق الزمني بين وقت الـ API والوقت الحالي للجهاز
+  const timeDifference = Date.now() - now.getTime();
+
+  // تطبيق الفارق على الوقت الثابت للحصول على الوقت الحالي
+  const targetDate = new Date(now.getTime() + timeDifference);
+
+  // تحديد خيارات التنسيق للوقت والتاريخ بناءً على التايم زون
+  const optionsTime = {
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: false,
+    timeZone: current_timezone,
+  };
+
+  // تنسيق الوقت
+  const currentTime = targetDate.toLocaleTimeString("en-US", optionsTime);
+
+  // تنسيق اسم اليوم والتاريخ
+  const todayName = targetDate.toLocaleDateString("en-US", {
+    weekday: "long",
+    timeZone: current_timezone,
+  });
+  const formattedCurrentDate = targetDate.toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+    timeZone: current_timezone,
+  });
+
+  // تحديث محتوى البطاقة
+  dateTextElement.textContent = `${timeIcon} Time: ${currentTime} | ${calendarIcon} Date: ${todayName}, ${formattedCurrentDate}`;
+
+  // تحديث عنوان البطاقة
+  if (cardTitleElement && lastCity !== "Unknown") {
+    cardTitleElement.textContent = `${lastCity} - ${lastCountry}`;
+  }
+}
+
+// تشغيل تحديث الوقت كل ثانية
+setInterval(updateClock, 1000);
+
 const updateWeather = (latitude, longitude) => {
   const apiURL = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,cloud_cover,rain,showers,snowfall,is_day&hourly=temperature_2m,precipitation,cloud_cover,rain,showers,snowfall,is_day&daily=sunrise,sunset&timezone=auto`;
 
@@ -30,6 +104,10 @@ const updateWeather = (latitude, longitude) => {
 
       const times_hourly = data.hourly.time;
       const times_current = data.current.time;
+
+      // تحديث التايم زون وآخر وقت من الـ API
+      current_timezone = data.timezone || "auto";
+      api_last_time = times_current;
 
       const clouds_hourly = data.hourly.cloud_cover;
       const clouds_current = data.current.cloud_cover;
@@ -64,24 +142,6 @@ const updateWeather = (latitude, longitude) => {
       const card_back = document.getElementById("card_back");
 
       let tableImg;
-
-      //Days of The Week
-      const days = [
-        "Sunday",
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday",
-      ];
-
-      //Icons
-      const sunriseIcon = "☀️";
-      const sunsetIcon = "🌒";
-      const calendarIcon = "📅";
-      const timeIcon = "⏰";
-      const tempIcon = "🌡️";
 
       /* Card open & Close */
       let frontCardVisible = true;
@@ -211,8 +271,13 @@ const updateWeather = (latitude, longitude) => {
             data.address.village ||
             "Unknown";
           const country = data.address.country || "Unknown";
-          const todayHour = times_current.slice(11, 16);
-          const date_current = times_current.slice(0, 10);
+
+          // تحديث المتغيرات العامة للمدينة والبلد
+          lastCity = city;
+          lastCountry = country;
+
+          // توفير قيمة تاريخية لاستخدامات الكود القديمة التي لم يتم تحديثها
+          const date_current = api_last_time.slice(0, 10);
 
           const timeSpan = function (time, timing) {
             timing(time);
@@ -222,7 +287,6 @@ const updateWeather = (latitude, longitude) => {
             for (let i = 0; i < time.length; i++) {
               time_hour = time[i].slice(11, 16);
               time_date = time[i].slice(0, 10);
-              //console.log(`Time: ${time_hour}, Date ${time_date}`);
             }
           };
 
@@ -235,20 +299,17 @@ const updateWeather = (latitude, longitude) => {
           const printCurrentSunrise = function (time) {
             time_hour = time[0].slice(11, 16);
             time_date = time.slice(0, 10);
-            //console.log(`Sunrise: ${time_hour}, Date ${time_date}`);
           };
 
           const printCurrentSunset = function (time) {
             time_hour = time[0].slice(11, 16);
             time_date = time.slice(0, 10);
-            //console.log(`Sunset: ${time_hour}, Date ${time_date}`);
           };
 
           const printWeeklySunrise = function (time) {
             for (let i = 0; i < time.length; i++) {
               time_hour = time[i].slice(11, 16);
               time_date = time[i].slice(0, 10);
-              //console.log(`Sunrise: ${time_hour}, Date ${time_date}`);
             }
           };
 
@@ -256,13 +317,15 @@ const updateWeather = (latitude, longitude) => {
             for (let i = 0; i < time.length; i++) {
               time_hour = time[i].slice(11, 16);
               time_date = time[i].slice(0, 10);
-              //console.log(`Sunset: ${time_hour}, Date ${time_date}`);
             }
           };
 
-          //Days Names "Today"
-          const dateStr = new Date(date_current);
-          const todayName = days[dateStr.getDay()];
+          //Days Names "Today" - نستخدم api_last_time لحساب اسم اليوم بالتوقيت الصحيح
+          const currentDateObj = new Date(api_last_time);
+          const todayName = currentDateObj.toLocaleDateString("en-US", {
+            weekday: "long",
+            timeZone: current_timezone,
+          });
 
           //Days Names "Week"
           let weekDays = dates_weekly.map((date_current) => {
@@ -270,12 +333,7 @@ const updateWeather = (latitude, longitude) => {
             return days[date.getDay()];
           });
 
-          const currentDateObj = new Date(date_current);
-          const options = { month: "long", day: "numeric" };
-          const formattedCurrentDate = currentDateObj.toLocaleDateString(
-            "en-US",
-            options
-          );
+          // لا يتم تحديث date_text هنا، دالة updateClock تقوم بذلك
 
           document.getElementById(
             "card-title"
@@ -285,9 +343,7 @@ const updateWeather = (latitude, longitude) => {
             "temperature-text"
           ).textContent = `${tempIcon} Temperature: ${temperature_current}°C`;
 
-          document.getElementById(
-            "date_text"
-          ).textContent = `${timeIcon} Time: ${todayHour} | ${calendarIcon} Date: ${todayName}, ${formattedCurrentDate}`;
+          // تم إزالة تحديث عنصر "date_text" هنا
 
           document.getElementById(
             "sunrise_text"
@@ -672,35 +728,43 @@ const sb = document.getElementById("search-button");
 const closeSB = document.getElementById("fullscreen-close-button");
 const SearchOverlay = document.getElementById("search-overlay");
 const searchBar = document.getElementById("fullscreen-searchform");
+const searchInput = document.getElementById("fullscreen-search-input");
+const suggestionsBox = document.getElementById("suggestions-box");
 
 searchBar.style.top = wHeight / 2 + "px";
 
-window.addEventListener(
-  "resize",
-  function () {
-    wHeight = window.innerHeight;
-    searchBar.style.top = wHeight / 2 + "px";
-  },
-  true
-);
+window.addEventListener("resize", () => {
+  wHeight = window.innerHeight;
+  searchBar.style.top = wHeight / 2 + "px";
+});
 
-document.addEventListener(
-  "click",
-  function () {
-    sb.onclick = function () {
-      SearchOverlay.classList.add("fullscreen-search-overlay-show");
-    };
+// افتح الـ overlay لما تضغط على زرار البحث
+sb.addEventListener("click", (e) => {
+  e.stopPropagation();
+  SearchOverlay.classList.add("fullscreen-search-overlay-show");
+});
 
-    closeSB.onclick = function () {
-      SearchOverlay.classList.remove("fullscreen-search-overlay-show");
-    };
-  },
-  true
-);
+// اقفل الـ overlay لما تضغط على زرار الإغلاق
+closeSB.addEventListener("click", (e) => {
+  e.stopPropagation();
+  SearchOverlay.classList.remove("fullscreen-search-overlay-show");
+});
+
+// اقفل الـ overlay لما تضغط في أي حتة برّه البحث أو الاقتراحات
+document.addEventListener("click", (e) => {
+  if (
+    SearchOverlay.classList.contains("fullscreen-search-overlay-show") &&
+    !searchBar.contains(e.target) &&
+    !suggestionsBox.contains(e.target) &&
+    e.target !== sb &&
+    e.target !== closeSB
+  ) {
+    suggestionsBox.innerHTML = "";
+    SearchOverlay.classList.remove("fullscreen-search-overlay-show");
+  }
+});
 
 /* Search Suggestions */
-const searchInput = document.getElementById("fullscreen-search-input");
-const suggestionsBox = document.getElementById("suggestions-box");
 const API_KEY = "1d6fc4b5cfe4490db8ea582b799b2ebd";
 
 searchInput.addEventListener("input", async (e) => {
@@ -711,13 +775,12 @@ searchInput.addEventListener("input", async (e) => {
     return;
   }
 
-  //Auto Complete
   const response = await fetch(
     `https://api.geoapify.com/v1/geocode/autocomplete?text=${query}&apiKey=${API_KEY}`
   );
   const data = await response.json();
 
-  suggestionsBox.innerHTML = ""; // Made that to clear previous suggestions
+  suggestionsBox.innerHTML = "";
 
   if (data.features) {
     data.features.forEach((feature) => {
@@ -725,7 +788,6 @@ searchInput.addEventListener("input", async (e) => {
       suggestionItem.classList.add("suggestion-item");
       suggestionItem.innerText = feature.properties.formatted;
 
-      //Here We Modify Coords
       suggestionItem.addEventListener("click", () => {
         searchInput.value = feature.properties.formatted;
         suggestionsBox.innerHTML = "";
@@ -734,18 +796,10 @@ searchInput.addEventListener("input", async (e) => {
         const lon = feature.properties.lon;
 
         updateWeather(lat, lon);
-
         SearchOverlay.classList.remove("fullscreen-search-overlay-show");
       });
 
       suggestionsBox.appendChild(suggestionItem);
     });
-  }
-});
-
-// To hide suggestions when users click outside
-document.addEventListener("click", (e) => {
-  if (e.target.id !== "fullscreen-search-input") {
-    suggestionsBox.innerHTML = "";
   }
 });
