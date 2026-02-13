@@ -1,0 +1,660 @@
+/* Max 600 */
+@media (max-width: 600px) {
+  #card_front {
+    width: 75% !important;
+    height: 35% !important;
+    max-height: 65% !important;
+    min-height: fit-content !important;
+    padding-top: 0 !important;
+    margin-top: 1rem !important;
+    position: absolute;
+    top: 10rem !important;
+  }
+
+  #card-title {
+    font-size: 1.8rem !important;
+    padding-top: 1.5rem;
+  }
+
+  #toggleIcon,
+  #toggleIconClose {
+    font-size: 2rem !important;
+    top: 1.5rem !important;
+    right: 1rem !important;
+  }
+
+  .search-trigger {
+    transform: scale(0.75) !important;
+    top: 1rem !important;
+    right: 0.5rem !important;
+  }
+
+  .logo {
+    position: absolute;
+    top: 1.5rem !important;
+    left: 1rem !important;
+  }
+
+  #logo-img {
+    width: 5rem !important;
+  }
+
+  #logo-text {
+    font-size: 1.2rem !important;
+    justify-self: center;
+  }
+
+  #weather-icon {
+    width: 15rem !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+
+  #temperature-text,
+  #date_text,
+  #time-text,
+  #dayShift,
+  #weather_description,
+  #sunrise_text,
+  #sunset_text {
+    font-size: 1.2rem !important;
+    margin-top: 1rem !important;
+  }
+
+  /*Back Side*/
+  #card_back {
+    height: 80% !important;
+    width: 90% !important;
+    justify-content: flex-start !important;
+    position: absolute;
+    top: 10rem !important;
+  }
+
+  #card-title-back {
+    margin-bottom: 2rem !important;
+    padding-top: 1rem !important;
+    font-size: 1.5rem !important;
+  }
+
+  /* Table & Cells */
+  .four-columns {
+    width: fit-content !important;
+    gap: 1rem !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    grid-template-rows: repeat(12, 1fr) !important;
+  }
+
+  .table-icon {
+    height: 1rem !important;
+    margin-right: 0.5rem !important;
+  }
+
+  .cell-text {
+    font-size: 0.7rem !important;
+  }
+
+  .cell {
+    width: fit-content;
+    padding: 0.25rem 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Week Cards */
+  .week-container {
+    bottom: 0.4rem !important;
+    gap: 5px !important;
+  }
+
+  .week-card {
+    width: 3.5rem !important;
+    height: 5rem !important;
+    border-radius: 1rem !important;
+  }
+
+  .date_text {
+    margin-top: 0 !important;
+    padding: 0 !important;
+    font-size: 0.5rem !important;
+  }
+
+  .weather-icon-week {
+    width: 2rem !important;
+    height: 2rem !important;
+    margin-bottom: 0 !important;
+  }
+
+  .footer {
+    bottom: 5px !important;
+    right: 10px !important;
+    z-index: 1000;
+  }
+
+  .social-icons {
+    gap: 3px !important;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .social-icon svg {
+    width: 18px !important;
+    height: 18px !important;
+  }
+
+  /* Search */
+  .fullscreen-search-overlay
+    #fullscreen-search-wrapper
+    #fullscreen-searchform
+    #fullscreen-search-input {
+    width: 25rem !important;
+    font-size: 1.5rem !important;
+  }
+
+  .fullscreen-search-icon {
+    font-size: 2rem !important;
+    display: flex !important;
+    align-self: center !important;
+    justify-self: center !important;
+  }
+}
+
+/* 600 */
+@media (min-width: 600px) {
+  #card_front {
+    width: 50% !important;
+    height: 30% !important;
+    min-height: fit-content !important;
+    padding-top: 0 !important;
+    position: absolute;
+    top: 2rem !important;
+  }
+
+  #card-title {
+    font-size: 1.8rem !important;
+    padding-top: 1.5rem;
+  }
+
+  #toggleIcon,
+  #toggleIconClose {
+    font-size: 2rem !important;
+    top: 1.5rem !important;
+    right: 1rem !important;
+  }
+
+  .search-trigger {
+    transform: scale(0.75) !important;
+    top: 1rem !important;
+    right: 0.5rem !important;
+  }
+
+  .logo {
+    position: absolute;
+    top: 1.5rem !important;
+    left: 1rem !important;
+  }
+
+  #logo-img {
+    width: 5rem !important;
+  }
+
+  #logo-text {
+    font-size: 1.2rem !important;
+    justify-self: center;
+  }
+
+  #weather-icon {
+    width: 13rem !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+
+  #temperature-text,
+  #date_text,
+  #time-text,
+  #dayShift,
+  #weather_description,
+  #sunrise_text,
+  #sunset_text {
+    font-size: 1.4rem !important;
+    margin-top: 1rem !important;
+  }
+
+  /*Back Side*/
+  #card_back {
+    height: 60% !important;
+    width: 70% !important;
+    justify-content: flex-start !important;
+    position: absolute;
+    top: 5rem;
+    padding: 1rem !important;
+  }
+
+  #card-title-back {
+    margin-bottom: 2rem !important;
+    padding-top: 1rem !important;
+    font-size: 1.5rem !important;
+  }
+
+  /* Table & Cells */
+  .four-columns {
+    width: 90% !important;
+    gap: 1rem !important;
+  }
+
+  .table-icon {
+    height: 1rem !important;
+    margin-right: 0.2rem !important;
+  }
+
+  .cell-text {
+    font-size: 0.7rem !important;
+  }
+
+  .cell {
+    width: fit-content;
+    padding: 0.125rem 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Week Cards */
+  .week-container {
+    bottom: 0.4rem !important;
+    gap: 5px !important;
+    justify-self: flex-start !important;
+    display: flex;
+    flex-direction: column !important;
+  }
+
+  .week-card {
+    width: 7rem !important;
+    height: 7rem !important;
+    border-radius: 1rem !important;
+  }
+
+  .date_text {
+    margin-top: 0 !important;
+    padding: 0 !important;
+    font-size: 0.75rem !important;
+  }
+
+  .weather-icon-week {
+    width: 4rem !important;
+    height: 4rem !important;
+  }
+
+  .footer {
+    bottom: 5px !important;
+    right: 5px !important;
+    z-index: 1000;
+  }
+
+  .social-icons {
+    gap: 3px !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  .social-icon svg {
+    width: 18px !important;
+    height: 18px !important;
+  }
+}
+
+/* 900 */
+@media (min-width: 900px) {
+  #card_front {
+    height: 65% !important;
+    min-height: fit-content !important;
+    margin-top: 1rem !important;
+    top: 2rem;
+  }
+
+  #card-title {
+    font-size: 3rem !important;
+    padding-top: 2rem;
+  }
+
+  .search-trigger {
+    transform: scale(0.8) !important;
+  }
+
+  .logo {
+    position: absolute;
+    top: 2.5rem;
+    left: 2.5rem;
+  }
+
+  #logo-img {
+    width: 8rem !important;
+  }
+
+  #logo-text {
+    font-size: 1.8rem !important;
+    justify-self: center;
+  }
+
+  #weather-icon {
+    width: 20rem !important;
+    margin-top: 1rem;
+  }
+
+  #temperature-text,
+  #date_text,
+  #time-text,
+  #dayShift,
+  #weather_description,
+  #sunrise_text,
+  #sunset_text {
+    font-size: 1.8rem !important;
+    margin-top: 0.75rem;
+  }
+
+  /*Back Side*/
+  #card_back {
+    height: 60% !important;
+    width: 70% !important;
+    justify-content: flex-start !important;
+    position: absolute;
+    top: 5rem;
+    padding: 1rem !important;
+  }
+
+  #card-title-back {
+    margin-bottom: 2rem !important;
+    padding-top: 1rem !important;
+    font-size: 2.5rem !important;
+  }
+
+  /* Table & Cells */
+  .four-columns {
+    width: 90% !important;
+    gap: 1rem !important;
+  }
+
+  .table-icon {
+    height: 2rem !important;
+    margin-right: 0.5rem !important;
+  }
+
+  .cell-text {
+    font-size: 1rem !important;
+  }
+
+  .cell {
+    width: fit-content;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Week Cards */
+  .week-container {
+    bottom: 0.4rem !important;
+    gap: 5px !important;
+  }
+
+  .week-card {
+    width: 8rem !important;
+    height: 8rem !important;
+    border-radius: 1.5rem;
+  }
+
+  .weather-icon-week {
+    width: 4rem !important;
+    height: 4rem !important;
+  }
+
+  .date_text {
+    font-size: 1rem !important;
+  }
+}
+
+/* 1200 */
+@media (min-width: 1200px) {
+  #card_front {
+    height: 50% !important;
+    max-height: 65% !important;
+    min-height: fit-content !important;
+    padding-top: 0 !important;
+    margin-top: 1rem !important;
+    position: absolute;
+    justify-content: flex-start !important;
+    top: 2rem;
+  }
+
+  #card-title {
+    font-size: 3rem !important;
+    padding-top: 2rem;
+  }
+
+  #toggleIcon,
+  #toggleIconClose {
+    transform: scale(1.2) !important;
+  }
+
+  .search-trigger {
+    transform: scale(1.1) !important;
+    right: 1rem !important;
+  }
+
+  .logo {
+    position: absolute;
+    top: 2.5rem;
+    left: 2.5rem;
+  }
+
+  #logo-img {
+    width: 12rem;
+  }
+
+  #logo-text {
+    font-size: 2.2rem;
+    justify-self: center;
+  }
+
+  #weather-icon {
+    width: 32rem;
+    margin-top: 2rem;
+  }
+
+  #temperature-text,
+  #date_text,
+  #time-text,
+  #dayShift,
+  #weather_description,
+  #sunrise_text,
+  #sunset_text {
+    font-size: 1.8rem !important;
+    margin-top: 1.5rem;
+  }
+
+  /*Back Side*/
+  #card_back {
+    height: 70% !important;
+    max-height: 70%;
+    width: 65%;
+    justify-content: flex-start !important;
+    position: absolute;
+    top: 4rem;
+  }
+
+  #card-title-back {
+    margin-bottom: 1rem !important;
+    padding-top: 4rem;
+  }
+
+  /* Table & Cells */
+  .four-columns {
+    width: 90% !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    grid-template-rows: repeat(8, 1fr) !important;
+    grid-auto-flow: column !important;
+    gap: 2rem;
+  }
+
+  .table-icon {
+    height: 2.5rem !important;
+    margin-right: 0.5rem !important;
+  }
+
+  .cell-text {
+    font-size: 1.4rem !important;
+  }
+
+  .cell {
+    width: fit-content;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Week Cards */
+  .week-container {
+    bottom: 2rem;
+    gap: 1rem !important;
+  }
+
+  .week-card {
+    width: 10rem !important;
+    height: 10rem !important;
+    border-radius: 2rem;
+  }
+
+  .weather-icon-week {
+    width: 6rem !important;
+    height: 6rem !important;
+  }
+
+  .date_text {
+    font-weight: 600 !important;
+  }
+
+  .social-icon svg {
+    width: 3rem !important;
+    height: 3rem !important;
+  }
+}
+
+/* 1440+px */
+@media (min-width: 1440px) {
+  #body {
+    position: relative;
+  }
+
+  #card_front {
+    height: 65% !important;
+    max-height: 65% !important;
+    min-height: fit-content !important;
+    padding-top: 0 !important;
+    margin-top: 1rem !important;
+    position: absolute;
+    justify-content: flex-start !important;
+    top: 2rem;
+  }
+
+  #card-title {
+    font-size: 6rem !important;
+    padding-top: 4rem;
+  }
+
+  #toggleIcon,
+  #toggleIconClose {
+    transform: scale(2) !important;
+    right: 4rem !important;
+    top: 4rem !important;
+  }
+
+  .search-trigger {
+    transform: scale(2) !important;
+    top: 4rem !important;
+    right: 4rem !important;
+  }
+
+  .logo {
+    position: absolute;
+    top: 2.5rem;
+    left: 2.5rem;
+  }
+
+  #logo-img {
+    width: 15rem !important;
+  }
+
+  #logo-text {
+    font-size: 3rem !important;
+    justify-self: center;
+  }
+
+  #weather-icon {
+    width: 40rem !important;
+    margin-top: 2rem;
+    margin-bottom: 2rem !important;
+  }
+
+  #temperature-text,
+  #date_text,
+  #time-text,
+  #dayShift,
+  #weather_description,
+  #sunrise_text,
+  #sunset_text {
+    font-size: 3rem !important;
+    margin-top: 2rem;
+  }
+
+  /*Back Side*/
+  #card_back {
+    height: 100% !important;
+    width: 80% !important;
+    justify-content: flex-start !important;
+    position: absolute;
+    top: 8rem;
+  }
+
+  #card-title-back {
+    font-size: 6rem !important;
+    padding-top: 4rem;
+    margin-bottom: 4rem !important;
+  }
+
+  /* Table & Cells */
+  .four-columns {
+    width: fit-content;
+  }
+
+  .table-icon {
+    height: 5rem !important;
+    margin-right: 1rem;
+  }
+
+  .cell-text {
+    font-size: 2.5rem !important;
+  }
+
+  .cell {
+    margin-bottom: 1rem !important;
+  }
+
+  /* Week Cards */
+  .week-container {
+    bottom: 2rem !important;
+    gap: 1rem !important;
+  }
+
+  .week-card {
+    width: 15rem !important;
+    height: 15rem !important;
+    border-radius: 2rem;
+  }
+
+  .weather-icon-week {
+    width: 8rem !important;
+    height: 8rem !important;
+  }
+
+  .date_text {
+    font-size: 1.8rem !important;
+  }
+
+  .social-icon svg {
+    width: 6rem !important;
+    height: 6rem !important;
+  }
+}
